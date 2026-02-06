@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-Hant" class="light">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登入 - 續續院 ContiNEW</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { "primary": "#105B58", "secondary": "#FF6D2C", "background-light": "#f8faf9", "background-dark": "#0a1f1e" },
+                    fontFamily: { "sans": ["Noto Sans TC", "Inter", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="/index.css">
+</head>
+<body>
+    <div class="relative min-h-screen w-full flex flex-col items-center justify-center overflow-hidden">
+        <div class="absolute inset-0 z-0 pointer-events-none">
+            <div class="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/5 blur-[120px]"></div>
+            <div class="absolute bottom-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/5 blur-[120px]"></div>
+            <div class="absolute inset-0 opacity-10" style="background-image: radial-gradient(#105B58 0.5px, transparent 0.5px); background-size: 32px 32px;"></div>
+        </div>
+
+        <div class="relative z-10 flex h-full grow flex-col items-center justify-center px-4 py-12 w-full">
+            <div class="w-full max-w-[460px] flex flex-col items-center">
+                <div class="flex flex-col items-center gap-2 mb-10">
+                    <div class="flex flex-col items-center">
+                        <img src="img/LOGO.png" alt="續續院 ContiNEW" class="h-20 w-auto mb-2" />
+                    </div>
+                    <h2 class="text-primary/80 text-sm font-bold uppercase tracking-widest">Enterprise AI Assets Platform</h2>
+                </div>
+
+                <div class="w-full bg-white/80 backdrop-blur-sm rounded-xl shadow-2xl shadow-primary/5 border border-slate-200/60 p-10">
+                    <div class="mb-8">
+                        <h1 class="text-slate-900 text-2xl font-bold leading-tight mb-2">系統登入</h1>
+                        <p class="text-slate-500 text-sm">請輸入您的帳號密碼以訪問續續院管理平台</p>
+                    </div>
+                    <form id="login-form" class="space-y-6">
+                        <div class="flex flex-col gap-2">
+                            <label class="text-slate-700 text-sm font-semibold">員工編號</label>
+                            <div class="relative group">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[20px]">badge</span>
+                                </div>
+                                <input id="login-id" class="flex w-full rounded-lg border border-slate-200 bg-slate-50/50 focus:outline-0 focus:ring-4 focus:ring-primary/10 focus:border-primary h-12 pl-12 pr-4 text-sm transition-all" placeholder="例如：EMP-12345" type="text" value="EMP-88291" />
+                            </div>
+                        </div>
+                        <div class="flex flex-col gap-2">
+                            <label class="text-slate-700 text-sm font-semibold">密碼</label>
+                            <div class="relative group">
+                                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none text-slate-400 group-focus-within:text-primary transition-colors">
+                                    <span class="material-symbols-outlined text-[20px]">lock</span>
+                                </div>
+                                <input class="flex w-full rounded-lg border border-slate-200 bg-slate-50/50 focus:outline-0 focus:ring-4 focus:ring-primary/10 focus:border-primary h-12 pl-12 pr-12 text-sm transition-all" placeholder="••••••••" type="password" value="password" />
+                            </div>
+                        </div>
+                        <button type="submit" class="w-full flex items-center justify-center gap-2 rounded-lg h-12 bg-primary hover:bg-[#0c4a47] text-white text-base font-bold shadow-lg shadow-primary/10 transition-all active:scale-[0.98] mt-2">
+                            <span>登入系統</span>
+                            <span class="material-symbols-outlined text-[20px]">login</span>
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>
