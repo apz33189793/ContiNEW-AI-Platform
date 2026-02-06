@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <title>成果產出 - 續續院</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#105B58", secondary: "#FF6D2C" },
+            fontFamily: { sans: ["Noto Sans TC", "Inter", "sans-serif"] },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <!-- Header -->
+    <header
+      class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-md px-6 py-3"
+    >
+      <div class="w-full flex items-center justify-between">
+        <div class="flex items-center gap-8">
+          <div
+            class="flex items-center gap-3 cursor-pointer"
+            onclick="window.location.href = '../dashboard/index.html'"
+          >
+            <img
+              src="../img/LOGO.png"
+              alt="續續院 ContiNEW"
+              class="h-10 w-auto"
+            />
+          </div>
+          <nav class="hidden md:flex items-center gap-6">
+            <a
+              class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+              href="../dashboard/index.html"
+              >案件總覽</a
+            >
+            <a class="text-sm font-bold text-primary" href="#">成果產出</a>
+          </nav>
+        </div>
+        <div class="relative">
+          <div
+            id="user-avatar"
+            class="h-9 w-9 rounded-full bg-slate-200 overflow-hidden border border-slate-300 cursor-pointer hover:ring-2 hover:ring-primary transition-all"
+          >
+            <img
+              class="h-full w-full object-cover"
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=faces"
+              alt="使用者頭像"
+            />
+          </div>
+          <!-- 登出選單 -->
+          <div
+            id="logout-menu"
+            class="hidden absolute right-0 top-12 bg-white rounded-lg shadow-lg border border-slate-200 py-2 min-w-[120px] z-50"
+          >
+            <button
+              id="logout-btn"
+              class="w-full px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2 transition-colors"
+            >
+              <span class="material-symbols-outlined text-base">logout</span>
+              登出
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div class="flex-col w-full max-w-[1400px] mx-auto px-6 py-8 min-h-screen">
+      <div
+        class="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-8"
+      >
+        <div>
+          <h1 class="text-3xl font-black text-slate-900 tracking-tight mb-2">
+            專案成果產出
+          </h1>
+          <p class="text-slate-500 max-w-2xl">
+            檢視、標記並匯出已核准的創意資產。
+          </p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button
+            class="bg-secondary text-white hover:opacity-90 px-4 py-2 rounded-xl text-sm font-bold shadow-sm flex items-center gap-2"
+          >
+            <span class="material-symbols-outlined">download_for_offline</span>
+            全部下載 (.zip)
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <!-- Output Card 1 -->
+        <div
+          class="bg-white rounded-2xl border border-slate-200 overflow-hidden flex flex-col shadow-sm"
+        >
+          <div class="relative aspect-[16/10] bg-slate-100">
+            <img
+              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop"
+              class="w-full h-full object-cover"
+            />
+            <div
+              class="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-lg"
+            >
+              <span class="material-symbols-outlined text-[14px]"
+                >check_circle</span
+              >
+              已核准
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-lg mb-1">主視覺橫幅 - 秋季系列</h3>
+            <p class="text-xs text-slate-500 mb-4">PNG • 2.4 MB</p>
+            <button
+              class="w-full bg-primary text-white py-2 rounded-lg text-sm font-bold"
+            >
+              檔案下載
+            </button>
+          </div>
+        </div>
+
+        <!-- Output Card 2 -->
+        <div
+          class="bg-white rounded-2xl border border-slate-200 overflow-hidden flex flex-col shadow-sm"
+        >
+          <div class="relative aspect-[16/10] bg-slate-100">
+            <img
+              src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=250&fit=crop"
+              class="w-full h-full object-cover"
+            />
+            <div
+              class="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-lg"
+            >
+              <span class="material-symbols-outlined text-[14px]"
+                >check_circle</span
+              >
+              已核准
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-lg mb-1">會議紀錄</h3>
+            <p class="text-xs text-slate-500 mb-4">docx • 15 MB</p>
+            <button
+              class="w-full bg-primary text-white py-2 rounded-lg text-sm font-bold"
+            >
+              檔案下載
+            </button>
+          </div>
+        </div>
+
+        <!-- Output Card 3 -->
+        <div
+          class="bg-white rounded-2xl border border-slate-200 overflow-hidden flex flex-col shadow-sm"
+        >
+          <div
+            class="relative aspect-[16/10] bg-slate-50 flex items-center justify-center"
+          >
+            <span class="material-symbols-outlined text-6xl text-slate-300"
+              >description</span
+            >
+            <div
+              class="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-lg"
+            >
+              <span class="material-symbols-outlined text-[14px]"
+                >check_circle</span
+              >
+              已核准
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-lg mb-1">IMC策略報告</h3>
+            <p class="text-xs text-slate-500 mb-4">docx • 1.2 MB</p>
+            <button
+              class="w-full bg-primary text-white py-2 rounded-lg text-sm font-bold"
+            >
+              檔案下載
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-8 text-center">
+        <button
+          class="text-slate-500 underline text-sm"
+          onclick="window.location.href = '../dashboard/index.html'"
+        >
+          返回儀表板
+        </button>
+      </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+      // 使用者頭像點擊顯示登出選單
+      const userAvatar = document.getElementById("user-avatar");
+      const logoutMenu = document.getElementById("logout-menu");
+      const logoutBtn = document.getElementById("logout-btn");
+
+      userAvatar.addEventListener("click", function (e) {
+        e.stopPropagation();
+        logoutMenu.classList.toggle("hidden");
+      });
+
+      // 點擊其他地方關閉選單
+      document.addEventListener("click", function (e) {
+        if (!userAvatar.contains(e.target) && !logoutMenu.contains(e.target)) {
+          logoutMenu.classList.add("hidden");
+        }
+      });
+
+      // 登出功能
+      logoutBtn.addEventListener("click", function () {
+        if (confirm("確定要登出嗎？")) {
+          window.location.href = "../index.html";
+        }
+      });
+    </script>
+  </body>
+</html>

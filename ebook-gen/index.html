@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>電子書生成 - 續續院</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { "primary": "#105B58", "secondary": "#FF6D2C" },
+                    fontFamily: { "sans": ["Noto Sans TC", "Inter", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen overflow-hidden">
+    <div class="flex h-full">
+        <!-- Upload Sidebar -->
+        <aside class="w-80 border-r border-slate-200 bg-white flex flex-col shrink-0 overflow-y-auto">
+            <div class="p-6 border-b border-slate-200">
+                <h3 class="text-lg font-bold text-primary">上傳素材</h3>
+                <p class="text-sm text-slate-500 mt-1">上傳圖片與文本檔案以生成電子書</p>
+            </div>
+            
+            <div class="flex-1 p-6 space-y-6">
+                <!-- Image Upload Section -->
+                <div>
+                    <label class="block text-sm font-bold mb-3 text-slate-700 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">image</span>
+                        上傳圖檔
+                    </label>
+                    <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 hover:border-primary transition-colors">
+                        <input type="file" id="image-upload" accept="image/jpeg,image/png,image/jpg" multiple class="hidden" />
+                        <label for="image-upload" class="cursor-pointer flex flex-col items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl text-slate-400 mb-2">cloud_upload</span>
+                            <span class="text-sm text-slate-600 mb-1">點擊或拖曳上傳圖片</span>
+                            <span class="text-xs text-slate-400">支援 JPG, PNG 格式（可多選）</span>
+                        </label>
+                        <div id="image-list" class="mt-4 space-y-2"></div>
+                    </div>
+                </div>
+
+                <!-- Text Upload Section -->
+                <div>
+                    <label class="block text-sm font-bold mb-3 text-slate-700 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-primary">description</span>
+                        上傳文本
+                    </label>
+                    <div class="border-2 border-dashed border-slate-300 rounded-lg p-6 hover:border-primary transition-colors">
+                        <input type="file" id="text-upload" accept=".txt,.pdf,.docx,text/plain,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document" multiple class="hidden" />
+                        <label for="text-upload" class="cursor-pointer flex flex-col items-center justify-center">
+                            <span class="material-symbols-outlined text-4xl text-slate-400 mb-2">cloud_upload</span>
+                            <span class="text-sm text-slate-600 mb-1">點擊或拖曳上傳檔案</span>
+                            <span class="text-xs text-slate-400">支援 TXT, PDF, DOCX 格式（可多選）</span>
+                        </label>
+                        <div id="text-list" class="mt-4 space-y-2"></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="p-6 border-t border-slate-200 space-y-2">
+                <button id="gen-btn" class="w-full bg-primary text-white py-3 rounded-lg text-sm font-bold shadow-lg hover:opacity-90 transition-all">生成電子書</button>
+                <button class="w-full text-slate-500 text-sm hover:text-slate-700 transition-colors" onclick="window.location.href='../execution-mode/index.html'">返回</button>
+            </div>
+        </aside>
+
+        <main class="flex-1 bg-slate-50 p-8 overflow-y-auto">
+             <div class="max-w-6xl mx-auto">
+                 <h2 class="text-xl font-bold text-primary mb-6">預覽電子書</h2>
+                 <div id="ebook-preview-grid" class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+                     <!-- E-book preview pages -->
+                     <div class="aspect-[3/4] bg-white shadow-lg rounded-lg overflow-hidden border border-slate-200">
+                         <img src="../img/book-demo1.png" class="w-full h-full object-cover" alt="電子書頁面 1" />
+                     </div>
+                     <div class="aspect-[3/4] bg-white shadow-lg rounded-lg overflow-hidden border border-slate-200">
+                         <img src="../img/book-demo2.png" class="w-full h-full object-cover" alt="電子書頁面 2" />
+                     </div>
+                     <div class="aspect-[3/4] bg-white shadow-lg rounded-lg overflow-hidden border border-slate-200">
+                         <img src="../img/book-demo3.png" class="w-full h-full object-cover" alt="電子書頁面 3" />
+                     </div>
+                     <div class="aspect-[3/4] bg-white shadow-lg rounded-lg overflow-hidden border border-slate-200">
+                         <img src="../img/book-demo4.png" class="w-full h-full object-cover" alt="電子書頁面 4" />
+                     </div>
+                 </div>
+                 <div id="ebook-finish-btn" class="mt-8 flex justify-center">
+                    <button class="bg-secondary text-white px-8 py-3 rounded-xl font-bold shadow-lg hover:opacity-90 transition-all" onclick="window.location.href='../final-output/index.html'">前往成果產出</button>
+                 </div>
+             </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>圖片生成 - 續續院</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { "primary": "#105B58", "secondary": "#FF6D2C" },
+                    fontFamily: { "sans": ["Noto Sans TC", "Inter", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen overflow-hidden">
+    <div class="flex h-full">
+        <!-- Sidebar -->
+        <aside class="w-80 border-r border-slate-200 bg-white flex flex-col shrink-0 overflow-y-auto">
+            <div class="p-6 border-b border-slate-200">
+                <div class="flex items-center gap-2 text-primary font-bold">
+                    <span class="material-symbols-outlined">image_search</span> AI 圖片生成
+                </div>
+            </div>
+            <div class="p-6 flex flex-col gap-6">
+                <div class="space-y-4">
+                    <label class="text-sm font-semibold block">提示詞輸入</label>
+                    <textarea class="w-full h-40 p-4 text-sm rounded-lg border border-slate-200 bg-slate-50 focus:ring-2 focus:ring-primary resize-none" placeholder="描述您專案所需的資產...">採光良好的現代辦公室，充滿未來感，以藍色和白色為主調，極簡風格。</textarea>
+                </div>
+                <div class="space-y-4">
+                    <label class="text-sm font-semibold block">圖片比例</label>
+                    <div class="grid grid-cols-3 gap-2">
+                        <button class="flex flex-col items-center py-2 rounded-lg border border-primary bg-primary/10 text-primary">1:1</button>
+                        <button class="flex flex-col items-center py-2 rounded-lg border border-slate-200 hover:border-primary">16:9</button>
+                        <button class="flex flex-col items-center py-2 rounded-lg border border-slate-200 hover:border-primary">9:16</button>
+                    </div>
+                </div>
+                <button id="gen-btn" class="w-full bg-primary hover:opacity-90 text-white font-medium py-3 rounded-lg flex items-center justify-center gap-2">
+                    <span id="img-gen-icon" class="material-symbols-outlined">bolt</span>
+                    <span id="img-gen-text">開始生成</span>
+                </button>
+                <button class="w-full bg-slate-100 hover:bg-slate-200 text-slate-700 font-medium py-2 rounded-lg" onclick="window.location.href='../execution-mode/index.html'">返回</button>
+            </div>
+        </aside>
+        <!-- Main Content -->
+        <main class="flex-1 bg-slate-50 p-8 overflow-y-auto">
+            <div class="max-w-6xl mx-auto">
+                <div class="flex items-end justify-between mb-6">
+                    <h2 class="text-2xl font-bold">生成結果</h2>
+                    <div class="flex gap-2">
+                            <button class="text-sm px-4 py-2 bg-white border rounded-lg" onclick="window.location.href='../review-mode/index.html'">進入審核</button>
+                    </div>
+                </div>
+                <div id="image-grid" class="grid grid-cols-2 gap-6">
+                    <!-- Placeholders -->
+                    <div class="aspect-video bg-white rounded-xl border border-slate-200 flex items-center justify-center text-slate-300">
+                            <span class="material-symbols-outlined text-4xl">image</span>
+                    </div>
+                    <div class="aspect-video bg-white rounded-xl border border-slate-200 flex items-center justify-center text-slate-300">
+                        <span class="material-symbols-outlined text-4xl">image</span>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

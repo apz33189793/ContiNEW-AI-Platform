@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>執行模式 - 續續院</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { "primary": "#105B58", "secondary": "#FF6D2C" },
+                    fontFamily: { "sans": ["Noto Sans TC", "Inter", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <div class="flex-col w-full max-w-7xl mx-auto px-6 py-8 lg:px-20 min-h-screen">
+        <nav class="flex items-center gap-2 text-sm text-slate-500 mb-6">
+            <a class="hover:text-primary cursor-pointer" href="../dashboard/index.html">專案管理</a>
+            <span class="material-symbols-outlined text-sm">chevron_right</span>
+            <span class="text-slate-900 font-medium">選擇執行模式</span>
+        </nav>
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-10">
+            <div>
+                <h1 class="text-3xl font-black text-slate-900 mb-2">選擇 AI 執行模式</h1>
+                <p class="text-slate-600 max-w-2xl">為個別素材分配特定的 AI 模型與生成任務。</p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6 mb-12">
+            <!-- Image Card -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden group hover:border-primary/50 transition-all">
+                <div class="aspect-video relative overflow-hidden bg-slate-100">
+                    <img alt="Hero" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=225&fit=crop" />
+                    <div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-slate-600">圖片</div>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4">
+                        <h3 class="font-bold text-slate-900">Main_Visual.jpg</h3>
+                        <p class="text-xs text-slate-500">4.2 MB</p>
+                    </div>
+                    <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../image-gen/index.html'">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">image_search</span>
+                            <span class="text-sm font-medium">生成圖片</span>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+
+             <!-- Document Card -->
+             <div class="bg-white rounded-xl border border-slate-200 overflow-hidden group hover:border-primary/50 transition-all">
+                <div class="aspect-video relative overflow-hidden bg-slate-100">
+                    <img alt="Document" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=400&h=225&fit=crop" />
+                    <div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-slate-600">文件</div>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4">
+                        <h3 class="font-bold text-slate-900">Product_Brief.docx</h3>
+                        <p class="text-xs text-slate-500">450 KB</p>
+                    </div>
+                    <div class="space-y-2">
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../meeting-record-gen/index.html'">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">summarize</span>
+                                <span class="text-sm font-medium">文字生成會議記錄</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                        </button>
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../script-gen/index.html'">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">article</span>
+                                <span class="text-sm font-medium">文字生成腳本</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                        </button>
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../copy-report-gen/index.html'">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">edit_note</span>
+                                <span class="text-sm font-medium">生成文案報告</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Audio to Meeting Record Card -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden group hover:border-primary/50 transition-all">
+                <div class="aspect-video relative overflow-hidden bg-slate-100">
+                    <img alt="Audio Meeting" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1478737270239-2f02b77fc618?w=400&h=225&fit=crop" />
+                    <div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-slate-600">音檔</div>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4">
+                        <h3 class="font-bold text-slate-900">Meeting_Recording.mp3</h3>
+                        <p class="text-xs text-slate-500">12.5 MB</p>
+                    </div>
+                    <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../meeting-record-gen/index.html'">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">transcribe</span>
+                            <span class="text-sm font-medium">音檔生成會議記錄</span>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Text to Meeting Record Card -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden group hover:border-primary/50 transition-all">
+                <div class="aspect-video relative overflow-hidden bg-slate-100">
+                    <img alt="Text Meeting" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=225&fit=crop" />
+                    <div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-slate-600">文字</div>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4">
+                        <h3 class="font-bold text-slate-900">Meeting_Notes.txt</h3>
+                        <p class="text-xs text-slate-500">2.3 KB</p>
+                    </div>
+                    <div class="space-y-2">
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../meeting-record-gen/index.html'">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">summarize</span>
+                                <span class="text-sm font-medium">文字生成會議記錄</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                        </button>
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../script-gen/index.html'">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">article</span>
+                                <span class="text-sm font-medium">文字生成腳本</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                        </button>
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../copy-report-gen/index.html'">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">edit_note</span>
+                                <span class="text-sm font-medium">生成文案報告</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Text to Script Card -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden group hover:border-primary/50 transition-all">
+                <div class="aspect-video relative overflow-hidden bg-slate-100">
+                    <img alt="Script" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1455390582262-044cdead277a?w=400&h=225&fit=crop" />
+                    <div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-slate-600">文字</div>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4">
+                        <h3 class="font-bold text-slate-900">Script_Draft.txt</h3>
+                        <p class="text-xs text-slate-500">5.8 KB</p>
+                    </div>
+                    <div class="space-y-2">
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../meeting-record-gen/index.html'">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">summarize</span>
+                                <span class="text-sm font-medium">文字生成會議記錄</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                        </button>
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../script-gen/index.html'">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">article</span>
+                                <span class="text-sm font-medium">文字生成腳本</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                        </button>
+                        <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='../copy-report-gen/index.html'">
+                            <div class="flex items-center gap-3">
+                                <span class="material-symbols-outlined text-primary">edit_note</span>
+                                <span class="text-sm font-medium">生成文案報告</span>
+                            </div>
+                            <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Video Edit Card -->
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden group hover:border-primary/50 transition-all">
+                <div class="aspect-video relative overflow-hidden bg-slate-100">
+                    <img alt="Video Edit" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1533750516457-a7f992034fec?w=400&h=225&fit=crop" />
+                    <div class="absolute top-3 right-3 bg-white/90 px-2 py-1 rounded text-[10px] font-bold uppercase tracking-wider text-slate-600">影片</div>
+                </div>
+                <div class="p-5">
+                    <div class="mb-4">
+                        <h3 class="font-bold text-slate-900">Video_Footage.mp4</h3>
+                        <p class="text-xs text-slate-500">125.8 MB</p>
+                    </div>
+                    <button class="w-full flex items-center justify-between p-3 rounded-lg border border-slate-100 bg-slate-50 hover:bg-primary/5 hover:border-primary/30 transition-colors group/btn" onclick="window.location.href='https://pse.is/8pbx56'">
+                        <div class="flex items-center gap-3">
+                            <span class="material-symbols-outlined text-primary">movie_edit</span>
+                            <span class="text-sm font-medium">影片素材編輯</span>
+                        </div>
+                        <span class="material-symbols-outlined text-slate-300 group-hover/btn:text-primary">arrow_forward</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- E-book Generation Section -->
+        <div class="mt-16 pt-12 border-t border-slate-200">
+            <div class="bg-white rounded-xl border border-slate-200 overflow-hidden shadow-sm">
+                <div class="flex flex-col md:flex-row items-center gap-8 p-8">
+                    <div class="flex-shrink-0">
+                        <div class="relative w-64 h-48 bg-slate-100 rounded-lg overflow-hidden">
+                            <img alt="E-book" class="w-full h-full object-cover" src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=400&h=300&fit=crop" />
+                        </div>
+                    </div>
+                    <div class="flex-1 flex flex-col items-start">
+                        <h2 class="text-2xl font-bold text-slate-900 mb-2">合成電子書</h2>
+                        <p class="text-slate-600 mb-6">整合多個素材，自動生成專業的電子書內容。</p>
+                        <button class="px-8 py-3 bg-primary text-white rounded-lg font-bold hover:opacity-90 shadow-lg shadow-primary/20 flex items-center gap-2 transition-all" onclick="window.location.href='../ebook-gen/index.html'">
+                            <span class="material-symbols-outlined">auto_stories</span>
+                            合成電子書
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

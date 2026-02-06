@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <title>審核模式 - 續續院</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { "primary": "#105B58", "secondary": "#FF6D2C" },
+                    fontFamily: { "sans": ["Noto Sans TC", "Inter", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800 h-screen overflow-hidden">
+    <div class="flex h-full">
+        <aside class="w-64 border-r border-slate-200 bg-white flex flex-col shrink-0">
+             <div class="p-4 border-b border-slate-200">
+                <h3 class="font-semibold text-sm">待審核資產</h3>
+            </div>
+            <div class="flex-1 overflow-y-auto p-2 space-y-2">
+                <div data-asset="image" class="asset-item flex items-center gap-3 p-2 rounded-lg bg-primary/10 text-primary cursor-pointer border-l-4 border-primary">
+                    <span class="material-symbols-outlined text-lg">image</span>
+                    <span class="text-sm font-medium">Generated_01.png</span>
+                </div>
+                <div data-asset="meeting" class="asset-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border-l-4 border-transparent">
+                    <span class="material-symbols-outlined text-lg text-slate-400">description</span>
+                    <span class="text-sm font-medium">會議記錄.docx</span>
+                </div>
+                <div data-asset="script" class="asset-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border-l-4 border-transparent">
+                    <span class="material-symbols-outlined text-lg text-slate-400">description</span>
+                    <span class="text-sm font-medium">OTV形象影片腳本.doc</span>
+                </div>
+                <div data-asset="report" class="asset-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border-l-4 border-transparent">
+                    <span class="material-symbols-outlined text-lg text-slate-400">description</span>
+                    <span class="text-sm font-medium">IMC策略報告.doc</span>
+                </div>
+            </div>
+        </aside>
+        
+        <div class="flex-1 flex flex-col bg-slate-50 p-6 overflow-y-auto">
+             <div id="preview-area" class="flex-1 flex items-center justify-center bg-slate-200/50 rounded-xl border border-slate-200 mb-6 relative min-h-0 p-6 overflow-auto">
+                 <img id="preview-image" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=800&fit=crop" class="max-h-full max-w-full rounded shadow-lg object-contain" />
+                 <div id="preview-text" class="hidden bg-white rounded-lg p-6 shadow-sm w-full max-w-2xl text-slate-700 text-sm leading-relaxed whitespace-pre-wrap"></div>
+             </div>
+             
+             <div class="h-48 bg-white border border-slate-200 rounded-xl flex">
+                 <div class="w-1/2 p-6 border-r border-slate-200">
+                     <h4 class="font-bold text-sm mb-2 flex gap-2 items-center">
+                        <span class="material-symbols-outlined text-primary">edit_note</span>指令編輯
+                     </h4>
+                     <textarea id="instruction-input" class="w-full h-24 text-sm border-slate-200 rounded-lg bg-slate-50 resize-none">High-fidelity digital art, modern office, blue theme...</textarea>
+                 </div>
+                 <div class="w-1/2 p-6 flex flex-col items-center justify-center gap-4">
+                     <div class="flex gap-4">
+                         <button class="px-8 py-3 bg-primary text-white rounded-xl font-bold shadow-lg hover:opacity-90" onclick="window.location.href='../final-output/index.html'">
+                             <span class="material-symbols-outlined align-middle mr-1">check_circle</span> 通過
+                         </button>
+                         <button class="px-8 py-3 bg-secondary text-white rounded-xl font-bold shadow-lg hover:opacity-90" onclick="window.location.href='../image-gen/index.html'">
+                            <span class="material-symbols-outlined align-middle mr-1">cancel</span> 退回
+                        </button>
+                     </div>
+                 </div>
+             </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <script>
+        const assetData = {
+            image: {
+                preview: 'image',
+                instruction: 'High-fidelity digital art, modern office, blue theme...'
+            },
+            meeting: {
+                preview: 'text',
+                text: `【2024 Q4 品牌行銷專案 第三次專案會議記錄】
+
+會議資訊
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+會議日期：2024 年 9 月 15 日（週五）
+會議時間：14:00 - 16:30
+會議地點：總部大樓 3F 會議室 A
+主持人：王經理
+記錄人：李秘書
+
+與會人員
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+行銷部：王經理、陳副理、林專員
+設計部：張組長、黃設計師
+業務部：吳經理（列席）
+財務部：鄭會計（列席）
+
+會議議程與討論摘要
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+一、Q4 行銷主軸確認
+王經理說明本季三大主軸：(1) 品牌年輕化溝通 (2) 節慶檔期整合行銷 (3) 會員再購促動。
+陳副理補充：社群素材需於 10 月中旬前完成初稿，以配合雙十一預熱檔期。
+決議：主軸方向全數通過，請行銷部於 9/20 前產出詳細時程表。
+
+二、預算分配審議
+鄭會計報告 Q4 行銷預算總額 850 萬，建議分配如下：
+  - 數位廣告：42%（357 萬）
+  - 社群內容製作：28%（238 萬）
+  - OTV/影音：18%（153 萬）
+  - 公關活動：12%（102 萬）
+吳經理提出業務端希望增加 B2B 展會預算，經討論後決議從公關預算中調撥 20 萬支援。
+
+三、素材審核流程
+張組長說明設計產出時程：主視覺 9/25、Banner 系列 10/5、EDM 版型 10/10。
+決議：建立三階段審核機制——初稿（設計內部）→ 複審（行銷）→ 決審（王經理）。
+各階段審核時限為 2 個工作天，逾期將影響上線排程。
+
+四、AI 生成素材試辦計畫
+林專員報告續續院 AI 平台測試進度：已完成圖片生成模組測試，文案模組預計 9 月底上線。
+決議：10 月先以 2 支社群貼文採 AI 輔助產出，比對人工產出之效益差異，作為 Q1 擴大導入依據。
+
+行動事項
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+1. 行銷部_陳副理：9/20 前產出 Q4 行銷時程表
+2. 設計部_張組長：9/22 前提供主視覺初稿
+3. 林專員：9/25 前完成 AI 平台效益評估簡報
+4. 鄭會計：9/18 前更新預算分配表並發送各單位
+
+下次會議
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+時間：2024 年 9 月 22 日（週五）14:00
+議程：主視覺審核、社群內容腳本討論`,
+                instruction: '請摘要會議重點並標註行動項目...'
+            },
+            script: {
+                preview: 'text',
+                text: `【OTV 品牌形象影片腳本 v.2】
+
+專案：2024 年度品牌形象影片
+時長：60 秒（含尾卡）
+規格：1920x1080 / 橫式
+調性：專業、溫暖、創新
+
+═══════════════════════════════════
+【第一幕】開場 — 0:00-0:08
+═══════════════════════════════════
+畫面：黑畫面淡入，白色品牌 Logo 自畫面中心浮現，周圍有細微粒子流動。
+音效： ambient 環境音漸強，帶有科技感卻不冰冷的電子音色。
+字卡：「我們相信，每一次的延續都是新的開始」
+
+旁白（沉穩男聲）：
+「在瞬息萬變的時代，唯有不斷創新，才能持續領先。」
+
+═══════════════════════════════════
+【第二幕】企業願景 — 0:08-0:22
+═══════════════════════════════════
+畫面：航拍城市天際線，清晨光線穿透雲層。剪接至辦公室內，團隊成員專注討論的側寫。
+轉場：時鐘指針快轉，暗示時間的推進與持續累積的成果。
+色調：暖色調，金色光暈象徵希望與成長。
+
+旁白：
+「十五年來，我們專注於一件事——幫助客戶創造更大的價值。
+從策略規劃到執行落地，我們陪伴每一個專案走過最關鍵的階段。」
+
+═══════════════════════════════════
+【第三幕】核心價值 — 0:22-0:38
+═══════════════════════════════════
+畫面：快速剪接多個專案成果畫面——會議簡報、設計稿、活動現場、客戶滿意的笑容。
+穿插：數據可視化動畫（營收成長曲線、服務客戶數、專案成功率）。
+節奏：由慢轉快，營造能量累積感。
+
+旁白：
+「整合行銷、品牌策略、數位轉型——我們用專業與創意，
+為超過 500 家企業寫下成功的故事。」
+
+═══════════════════════════════════
+【第四幕】團隊與文化 — 0:38-0:50
+═══════════════════════════════════
+畫面：團隊成員真實工作場景，輕鬆自然的互動。有人在白板前比劃、有人在吧台邊討論。
+氛圍：真實、溫暖、充滿活力。避免過於刻意的擺拍感。
+
+旁白：
+「我們是一群相信『續續』力量的人。
+每一次的交接、每一次的迭代，都讓我們離目標更近一步。」
+
+═══════════════════════════════════
+【第五幕】結尾 CTA — 0:50-0:60
+═══════════════════════════════════
+畫面：Logo 再次浮現，搭配品牌 Slogan 字卡。
+字卡：「續續院 ContiNEW — 創造你的下一篇章」
+聯絡資訊：官網網址、客服專線
+
+旁白：
+「你的下一篇章，從這裡開始。續續院，與你一起前行。」
+
+═══════════════════════════════════
+【製作備註】
+• BGM 建議：鋼琴+弦樂，節奏中等偏慢，情感飽滿
+• 旁白錄音：需錄製國語、英語雙語版本
+• 字幕：需含繁中、簡中、英文字幕檔`,
+                instruction: '請優化腳本節奏與轉場描述...'
+            },
+            report: {
+                preview: 'text',
+                text: `【2024 整合行銷傳播策略規劃報告】
+
+續續院 ContiNEW 企業客戶事業處
+機密文件 · 僅供內部參考
+
+═══════════════════════════════════
+壹、執行摘要
+═══════════════════════════════════
+本報告針對 2024 年整合行銷傳播（IMC）策略進行全面性規劃，涵蓋市場環境分析、目標客群界定、競品態勢、通路策略及預算配置。主要結論如下：
+
+• 市場機會：B2B 企業服務數位化需求持續增長，預估年度市場規模達 120 億，年增率 8.2%
+• 核心目標：提升品牌知名度 25%、潛在客戶名單成長 40%、既有客戶交叉銷售率提升 15%
+• 策略主軸：以「內容行銷 + 精準廣告 + 社群經營」三箭齊發，建立完整的客戶旅程觸及
+• 預算建議：年度 IMC 預算 2,400 萬，ROI 目標 1:4.5
+
+═══════════════════════════════════
+貳、市場概況分析
+═══════════════════════════════════
+一、總體經濟環境
+2024 年台灣經濟成長率預估 3.2%，企業資本支出意願回升。製造業數位轉型、服務業體驗升級成為主要投資方向，帶動顧問服務、行銷科技、雲端解決方案等需求。
+
+二、產業趨勢
+• 行銷自動化工具普及率提升，MarTech 支出年增 12%
+• 短影音、Podcast 成為 B2B 內容新戰場
+• 隱私法規趨嚴，第一方數據策略成為關鍵競爭力
+
+三、目標市場規模
+本司主攻之中大型企業（營收 5 億以上）市場，潛在客戶數約 12,000 家，其中具有明確行銷升級需求者約 3,600 家，年度商機潛力約 85 億。
+
+═══════════════════════════════════
+參、目標客群分析
+═══════════════════════════════════
+一、主要客群畫像（Primary Persona）
+「行銷決策者 Peter」— 35-45 歲，企業行銷長或行銷副總，管理 5-20 人團隊。
+痛點：預算緊縮但 KPI 不減、需要證明行銷投資效益、缺乏數位轉型經驗。
+資訊取得：LinkedIn、產業研討會、同業介紹、搜尋引擎。
+
+二、次要客群畫像（Secondary Persona）
+「專案執行者 Amy」— 28-35 歲，行銷經理或資深專員，負責實際執行。
+痛點：資源不足、跨部門協調困難、需要可落地的工具與方法論。
+資訊取得：Facebook 社團、YouTube、部落格、線上課程。
+
+三、決策歷程（Buyer Journey）
+認知階段（Awareness）→ 考慮階段（Consideration）→ 決策階段（Decision）→ 倡導階段（Advocacy）
+各階段平均歷時 3-6 個月，需持續內容觸及以維持心智占有率。
+
+═══════════════════════════════════
+肆、競品分析
+═══════════════════════════════════
+一、主要競品 A
+定位：高端策略顧問，客單價 200-500 萬
+優勢：品牌歷史久、國際案例多
+劣勢：價格高、交期長、數位執行力弱
+我們的差異：提供策略+執行的整合方案，性價比更佳
+
+二、主要競品 B
+定位：數位行銷執行，客單價 50-150 萬
+優勢：技術強、投放成效好
+劣勢：缺乏策略高度、品牌溝通弱
+我們的差異：具備策略顧問能力，可從規劃到落地一條龍服務
+
+三、SWOT 總結
+優勢：整合能力、產業經驗、AI 工具領先
+劣勢：品牌知名度尚待提升
+機會：數位轉型潮、內容行銷紅利
+威脅：新進玩家價格戰、客戶預算緊縮
+
+═══════════════════════════════════
+伍、整合行銷策略建議
+═══════════════════════════════════
+一、內容行銷策略
+• 白皮書/產業報告：每季 1 份，建立思想領導地位
+• 案例故事：每月 2 則客戶成功案例，含影片與圖文
+• 部落格/SEO：每週 2 篇文章，鎖定長尾關鍵字
+• 彙整建議：鎖定「B2B 行銷」、「數位轉型」、「品牌策略」等主題
+
+二、付費媒體策略
+• LinkedIn Ads：針對企業決策者精準投放，預算占比 35%
+• Google Ads：搜尋+GDN 搭配，鎖定高意圖關鍵字，預算占比 30%
+• Meta Ads：再行銷與 Lookalike，預算占比 20%
+• 聯播網/程序化：品牌曝光與觸及擴充，預算占比 15%
+
+三、社群經營策略
+• LinkedIn：專業內容、產業洞察、活動訊息，目標粉絲 5,000
+• Facebook：輕量內容、活動花絮、客戶見證，目標粉絲 8,000
+• YouTube：專案影片、教學內容、活動錄影，目標訂閱 2,000
+
+四、公關與活動
+• 產業論壇：主辦或協辦 2 場大型活動
+• 媒體曝光：爭取 12 篇以上媒體報導
+• 線上研討會：每季 1 場 Webinar，名單獲取與培育
+
+═══════════════════════════════════
+陸、預算配置與時程
+═══════════════════════════════════
+年度總預算：2,400 萬
+
+Q1（品牌強化）：580 萬 — 白皮書、官網改版、品牌影片
+Q2（潛客開發）：650 萬 — 大型活動、付費廣告加碼、內容產出
+Q3（轉換衝刺）：620 萬 — 案例行銷、再行銷、研討會
+Q4（年度收尾）：550 萬 — 節慶行銷、年度回顧、明年預熱
+
+═══════════════════════════════════
+柒、效益評估指標（KPI）
+═══════════════════════════════════
+• 品牌：無輔助品牌回憶度 25%、NPS 提升至 45
+• 潛客：官網訪客 年增 50%、名單數 年增 40%
+• 轉換：商機數 年增 35%、成交率 提升至 22%
+• 效益：行銷獲客成本（CAC）下降 15%、LTV/CAC 達 4.5 以上
+
+報告完成日期：2024 年 9 月
+版本：v1.2`,
+                instruction: '請補充競品比較章節...'
+            }
+        };
+
+        document.querySelectorAll('.asset-item').forEach(item => {
+            item.addEventListener('click', function() {
+                const asset = this.dataset.asset;
+                document.querySelectorAll('.asset-item').forEach(i => {
+                    i.classList.remove('bg-primary/10', 'text-primary', 'border-primary');
+                    i.classList.add('border-transparent');
+                    i.querySelector('.material-symbols-outlined').classList.remove('text-primary');
+                    i.querySelector('.material-symbols-outlined').classList.add('text-slate-400');
+                });
+                this.classList.add('bg-primary/10', 'text-primary', 'border-primary');
+                this.classList.remove('border-transparent');
+                this.querySelector('.material-symbols-outlined').classList.remove('text-slate-400');
+                this.querySelector('.material-symbols-outlined').classList.add('text-primary');
+
+                const data = assetData[asset];
+                if (data.preview === 'image') {
+                    document.getElementById('preview-image').classList.remove('hidden');
+                    document.getElementById('preview-text').classList.add('hidden');
+                } else {
+                    document.getElementById('preview-image').classList.add('hidden');
+                    document.getElementById('preview-text').classList.remove('hidden');
+                    document.getElementById('preview-text').textContent = data.text;
+                }
+                document.getElementById('instruction-input').value = data.instruction;
+            });
+        });
+    </script>
+</body>
+</html>

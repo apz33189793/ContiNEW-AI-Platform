@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>案件總覽 - 續續院</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: { "primary": "#105B58", "secondary": "#FF6D2C" },
+                    fontFamily: { "sans": ["Noto Sans TC", "Inter", "sans-serif"] }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="bg-slate-50 text-slate-800">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-md px-6 py-3">
+        <div class="w-full flex items-center justify-between">
+            <div class="flex items-center gap-8">
+                <div class="flex items-center gap-3 cursor-pointer" onclick="window.location.href='../index.html'">
+                    <img src="../img/LOGO.png" alt="續續院 ContiNEW" class="h-10 w-auto" />
+                </div>
+                <nav class="hidden md:flex items-center gap-6">
+                    <a class="text-sm font-bold text-primary" href="index.html">案件總覽</a>
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors" href="../final-output/index.html">成果產出</a>
+                </nav>
+            </div>
+            <div class="relative">
+                <div id="user-avatar" class="h-9 w-9 rounded-full bg-slate-200 overflow-hidden border border-slate-300 cursor-pointer hover:ring-2 hover:ring-primary transition-all">
+                    <img class="h-full w-full object-cover" src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=faces" alt="使用者頭像" />
+                </div>
+                <!-- 登出選單 -->
+                <div id="logout-menu" class="hidden absolute right-0 top-12 bg-white rounded-lg shadow-lg border border-slate-200 py-2 min-w-[120px] z-50">
+                    <button id="logout-btn" class="w-full px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2 transition-colors">
+                        <span class="material-symbols-outlined text-base">logout</span>
+                        登出
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <div class="flex-col w-full px-6 lg:px-10 py-8 max-w-[1440px] mx-auto min-h-screen">
+        <div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+            <div>
+                <h2 class="text-3xl font-black tracking-tight text-slate-900">案件總覽</h2>
+                <p class="text-slate-500 mt-1">管理並執行您的 AI 創意資產生成流程。</p>
+            </div>
+            <div class="flex items-center gap-2 p-1 bg-slate-100 rounded-xl w-fit">
+                <button id="filter-all" class="filter-tab px-4 py-2 text-sm font-semibold bg-white rounded-lg shadow-sm text-primary transition-colors">全部案件</button>
+                <button id="filter-inprogress" class="filter-tab px-4 py-2 text-sm font-medium text-slate-600 hover:text-slate-800 transition-colors">進行中</button>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Project Card 1 -->
+            <div class="project-card group flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1" data-status="進行中">
+                <div class="h-48 overflow-hidden relative">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=300&fit=crop" />
+                    <div class="absolute top-3 left-3">
+                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-orange-100 text-secondary backdrop-blur-sm">進行中</span>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined text-slate-400 text-base">video_library</span>
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">多媒體生成</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight">2024 秋季品牌行銷案</h3>
+                    <p class="text-sm text-slate-500 line-clamp-2 mb-6">AI 驅動的整合行銷素材，包含主視覺、文案與動態影音。</p>
+                    <div class="mt-auto pt-4 flex items-center justify-between gap-3 border-t border-slate-100">
+                        <button class="flex-1 px-4 py-2 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors" onclick="showCaseDetail('2024 秋季品牌行銷案', '整合行銷活動', '2024-09-01', '2024-12-31', '針對年輕族群推廣新產品線，需要活潑、高飽和度的視覺風格。AI 驅動的整合行銷素材，包含主視覺、文案與動態影音。')">檢視</button>
+                        <button class="flex-[1.5] px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-[#0d4a48] rounded-lg transition-colors flex items-center justify-center gap-1" onclick="window.location.href='../execution-mode/index.html'">
+                            <span class="material-symbols-outlined text-sm">play_arrow</span>
+                            執行案件
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+             <!-- Project Card 2 -->
+             <div class="project-card group flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1" data-status="已完成">
+                <div class="h-48 overflow-hidden relative">
+                    <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=400&h=300&fit=crop" />
+                    <div class="absolute top-3 left-3">
+                        <span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-green-100 text-green-700 backdrop-blur-sm">已完成</span>
+                    </div>
+                </div>
+                <div class="p-5 flex flex-col flex-1">
+                    <div class="flex items-center gap-2 mb-2">
+                        <span class="material-symbols-outlined text-slate-400 text-base">description</span>
+                        <span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">文檔分析</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight">Q3 競品分析報告</h3>
+                    <p class="text-sm text-slate-500 line-clamp-2 mb-6">自動化市場數據整合與策略建議生成。</p>
+                    <div class="mt-auto pt-4 flex items-center justify-between gap-3 border-t border-slate-100">
+                        <button class="flex-1 px-4 py-2 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors" onclick="showCaseDetail('Q3 競品分析報告', '文檔分析', '2024-07-01', '2024-09-30', '自動化市場數據整合與策略建議生成。涵蓋主要競品的產品定位、定價策略、行銷活動與市佔率變化，並提供可執行的策略建議。')">檢視</button>
+                        <button class="flex-[1.5] px-4 py-2 text-sm font-bold text-white bg-slate-600 hover:bg-slate-700 rounded-lg transition-colors flex items-center justify-center gap-1" onclick="window.location.href='../final-output/index.html'">
+                            <span class="material-symbols-outlined text-sm">download</span>
+                            下載成果
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- New Project -->
+            <div class="project-card flex flex-col items-center justify-center bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl p-8 hover:border-secondary/50 hover:bg-slate-100 transition-all group cursor-pointer" data-status="new" onclick="window.location.href='../edit-project/index.html'">
+                <div class="h-16 w-16 rounded-full bg-white shadow-md flex items-center justify-center text-slate-400 group-hover:text-secondary transition-colors mb-4">
+                    <span class="material-symbols-outlined text-3xl">add</span>
+                </div>
+                <h3 class="text-lg font-bold text-slate-900 mb-1">新增案件</h3>
+                <p class="text-sm text-slate-500 text-center">開始一個新的創意生成專案。</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 案件簡述 Modal -->
+    <div id="case-detail-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/50">
+        <div class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-6 border-b border-slate-200 flex items-center justify-between">
+                <h3 class="text-xl font-bold text-slate-900">案件簡述</h3>
+                <div class="flex items-center gap-2">
+                    <button id="modal-edit-btn" class="px-4 py-2 rounded-lg text-sm font-bold text-primary hover:bg-primary/10 transition-colors flex items-center gap-1">
+                        <span class="material-symbols-outlined text-base">edit</span>編輯
+                    </button>
+                    <button id="close-modal" class="p-2 rounded-lg hover:bg-slate-100 transition-colors">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
+            </div>
+            <div class="p-6 space-y-5">
+                <!-- 唯讀顯示 -->
+                <div id="modal-view-mode">
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-slate-500">案件名稱</label>
+                        <p id="modal-case-name" class="text-slate-900 font-medium"></p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-slate-500">案件類型</label>
+                        <p id="modal-case-type" class="text-slate-900 font-medium"></p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-slate-500">專案走期</label>
+                        <p id="modal-project-period" class="text-slate-900 font-medium"></p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-slate-500">案件描述</label>
+                        <p id="modal-case-description" class="text-slate-700 leading-relaxed whitespace-pre-wrap"></p>
+                    </div>
+                </div>
+                <!-- 編輯模式 -->
+                <div id="modal-edit-mode" class="hidden space-y-5">
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-slate-700">案件名稱</label>
+                        <input id="modal-edit-name" type="text" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-slate-700">案件類型</label>
+                        <select id="modal-edit-type" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none">
+                            <option value="整合行銷活動">整合行銷活動</option>
+                            <option value="社群媒體素材">社群媒體素材</option>
+                            <option value="文檔分析">文檔分析</option>
+                            <option value="custom">其他（自訂）</option>
+                        </select>
+                        <input id="modal-edit-type-custom" type="text" placeholder="請輸入案件類型" class="w-full px-4 py-3 rounded-lg border border-slate-200 mt-2 hidden outline-none focus:border-primary focus:ring-1 focus:ring-primary" />
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-slate-700">專案走期</label>
+                        <div class="flex gap-2 items-center">
+                            <input id="modal-edit-start" type="date" class="flex-1 px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none" />
+                            <span class="text-slate-400">至</span>
+                            <input id="modal-edit-end" type="date" class="flex-1 px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none" />
+                        </div>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-bold mb-2 text-slate-700">案件描述</label>
+                        <textarea id="modal-edit-description" rows="4" class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="p-6 border-t border-slate-200 flex gap-3">
+                <button id="modal-save-btn" class="hidden flex-1 px-6 py-3 rounded-lg bg-primary text-white text-sm font-bold hover:opacity-90 transition-colors">儲存</button>
+                <button id="modal-close-btn" class="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-colors">關閉</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+    <script>
+        // 使用者頭像點擊顯示登出選單
+        const userAvatar = document.getElementById('user-avatar');
+        const logoutMenu = document.getElementById('logout-menu');
+        const logoutBtn = document.getElementById('logout-btn');
+
+        userAvatar.addEventListener('click', function(e) {
+            e.stopPropagation();
+            logoutMenu.classList.toggle('hidden');
+        });
+
+        // 點擊其他地方關閉選單
+        document.addEventListener('click', function(e) {
+            if (!userAvatar.contains(e.target) && !logoutMenu.contains(e.target)) {
+                logoutMenu.classList.add('hidden');
+            }
+        });
+
+        // 案件篩選切換
+        const filterAll = document.getElementById('filter-all');
+        const filterInprogress = document.getElementById('filter-inprogress');
+        const projectCards = document.querySelectorAll('.project-card');
+
+        function setFilter(activeFilter) {
+            filterAll.classList.toggle('bg-white', activeFilter === 'all');
+            filterAll.classList.toggle('shadow-sm', activeFilter === 'all');
+            filterAll.classList.toggle('text-primary', activeFilter === 'all');
+            filterAll.classList.toggle('font-semibold', activeFilter === 'all');
+            filterAll.classList.toggle('font-medium', activeFilter !== 'all');
+            filterAll.classList.toggle('text-slate-600', activeFilter !== 'all');
+
+            filterInprogress.classList.toggle('bg-white', activeFilter === 'inprogress');
+            filterInprogress.classList.toggle('shadow-sm', activeFilter === 'inprogress');
+            filterInprogress.classList.toggle('text-primary', activeFilter === 'inprogress');
+            filterInprogress.classList.toggle('font-semibold', activeFilter === 'inprogress');
+            filterInprogress.classList.toggle('font-medium', activeFilter !== 'inprogress');
+            filterInprogress.classList.toggle('text-slate-600', activeFilter !== 'inprogress');
+
+            projectCards.forEach(card => {
+                const status = card.dataset.status;
+                if (activeFilter === 'all') {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.toggle('hidden', status !== '進行中' && status !== 'new');
+                }
+            });
+        }
+
+        filterAll.addEventListener('click', () => setFilter('all'));
+        filterInprogress.addEventListener('click', () => setFilter('inprogress'));
+
+        // 登出功能
+        logoutBtn.addEventListener('click', function() {
+            if (confirm('確定要登出嗎？')) {
+                window.location.href = '../index.html';
+            }
+        });
+
+        // 案件簡述 Modal
+        let currentModalData = { name: '', type: '', startDate: '', endDate: '', description: '' };
+
+        function showCaseDetail(name, type, startDate, endDate, description) {
+            currentModalData = { name, type, startDate, endDate, description };
+            const modal = document.getElementById('case-detail-modal');
+            document.getElementById('modal-case-name').textContent = name;
+            document.getElementById('modal-case-type').textContent = type;
+            document.getElementById('modal-project-period').textContent = formatDate(startDate) + ' 至 ' + formatDate(endDate);
+            document.getElementById('modal-case-description').textContent = description;
+            // 填入編輯欄位
+            document.getElementById('modal-edit-name').value = name;
+            const isPredefined = ['整合行銷活動','社群媒體素材','文檔分析'].includes(type);
+            document.getElementById('modal-edit-type').value = isPredefined ? type : 'custom';
+            document.getElementById('modal-edit-type-custom').value = isPredefined ? '' : type;
+            document.getElementById('modal-edit-type-custom').classList.toggle('hidden', isPredefined);
+            document.getElementById('modal-edit-start').value = startDate || '';
+            document.getElementById('modal-edit-end').value = endDate || '';
+            document.getElementById('modal-edit-description').value = description || '';
+            switchToViewMode();
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+        }
+
+        function formatDate(dateStr) {
+            if (!dateStr) return '未設定';
+            const d = new Date(dateStr);
+            return d.getFullYear() + '/' + String(d.getMonth() + 1).padStart(2, '0') + '/' + String(d.getDate()).padStart(2, '0');
+        }
+
+        function switchToViewMode() {
+            document.getElementById('modal-view-mode').classList.remove('hidden');
+            document.getElementById('modal-edit-mode').classList.add('hidden');
+            document.getElementById('modal-edit-btn').classList.remove('hidden');
+            document.getElementById('modal-save-btn').classList.add('hidden');
+        }
+
+        function switchToEditMode() {
+            document.getElementById('modal-view-mode').classList.add('hidden');
+            document.getElementById('modal-edit-mode').classList.remove('hidden');
+            document.getElementById('modal-edit-btn').classList.add('hidden');
+            document.getElementById('modal-save-btn').classList.remove('hidden');
+        }
+
+        function saveModalData() {
+            const typeSelect = document.getElementById('modal-edit-type');
+            const typeValue = typeSelect.value === 'custom' 
+                ? document.getElementById('modal-edit-type-custom').value || '其他（自訂）'
+                : typeSelect.value;
+            currentModalData = {
+                name: document.getElementById('modal-edit-name').value,
+                type: typeValue,
+                startDate: document.getElementById('modal-edit-start').value,
+                endDate: document.getElementById('modal-edit-end').value,
+                description: document.getElementById('modal-edit-description').value
+            };
+            document.getElementById('modal-case-name').textContent = currentModalData.name;
+            document.getElementById('modal-case-type').textContent = currentModalData.type;
+            document.getElementById('modal-project-period').textContent = formatDate(currentModalData.startDate) + ' 至 ' + formatDate(currentModalData.endDate);
+            document.getElementById('modal-case-description').textContent = currentModalData.description;
+            switchToViewMode();
+            // 這裡可加入實際的 API 儲存邏輯
+            console.log('已儲存案件資料:', currentModalData);
+        }
+
+        document.getElementById('modal-edit-type').addEventListener('change', function() {
+            const custom = document.getElementById('modal-edit-type-custom');
+            custom.classList.toggle('hidden', this.value !== 'custom');
+        });
+
+        document.getElementById('modal-edit-btn').addEventListener('click', switchToEditMode);
+        document.getElementById('modal-save-btn').addEventListener('click', saveModalData);
+
+        function closeCaseDetailModal() {
+            const modal = document.getElementById('case-detail-modal');
+            modal.classList.add('hidden');
+            modal.classList.remove('flex');
+        }
+
+        document.getElementById('close-modal').addEventListener('click', closeCaseDetailModal);
+        document.getElementById('modal-close-btn').addEventListener('click', closeCaseDetailModal);
+        document.getElementById('case-detail-modal').addEventListener('click', function(e) {
+            if (e.target === this) closeCaseDetailModal();
+        });
+    </script>
+</body>
+</html>
