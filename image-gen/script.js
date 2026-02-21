@@ -1,35 +1,126 @@
-document.getElementById('gen-btn').addEventListener('click', function() {
-    const btnIcon = document.getElementById('img-gen-icon');
-    const btnText = document.getElementById('img-gen-text');
-    const grid = document.getElementById('image-grid');
+(function() {
+    const IMG_BASE = '../img/';
+    const RESULT_IMGS = ['img-gen-01.png', 'img-gen-02.png', 'img-gen-03.png'];
 
-    if (!btnIcon || !btnText || !grid) return;
+    var lightbox = document.getElementById('image-lightbox');
+    var lightboxImg = document.getElementById('lightbox-img');
+    var lightboxClose = document.getElementById('lightbox-close');
 
-    // Loading State
-    btnIcon.classList.add('animate-spin');
-    btnText.innerText = '生成中...';
-    
-    // Clear grid and show skeletons
-    grid.innerHTML = `
-        <div class="aspect-video bg-slate-200 animate-pulse rounded-xl"></div>
-        <div class="aspect-video bg-slate-200 animate-pulse rounded-xl"></div>
-    `;
+    function openLightbox(src) {
+        if (!lightbox || !lightboxImg) return;
+        lightboxImg.src = src;
+        lightbox.classList.remove('hidden');
+        lightbox.classList.add('flex');
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
 
-    // Simulate API delay
-    setTimeout(() => {
-        btnIcon.classList.remove('animate-spin');
-        btnText.innerText = '再次生成';
-        
-        // Show Result
-        grid.innerHTML = `
-            <div class="group relative aspect-video bg-white rounded-xl overflow-hidden shadow-sm cursor-pointer border-2 border-transparent hover:border-secondary transition-all">
-                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop" class="w-full h-full object-cover">
-                <div class="absolute bottom-2 right-2 bg-white px-2 py-1 text-xs font-bold rounded shadow">Ver A</div>
-            </div>
-            <div class="group relative aspect-video bg-white rounded-xl overflow-hidden shadow-sm cursor-pointer border-2 border-transparent hover:border-secondary transition-all">
-                <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=600&h=400&fit=crop" class="w-full h-full object-cover">
-                <div class="absolute bottom-2 right-2 bg-white px-2 py-1 text-xs font-bold rounded shadow">Ver B</div>
-            </div>
-        `;
-    }, 2000);
-});
+    function closeLightbox() {
+        if (!lightbox) return;
+        lightbox.classList.add('hidden');
+        lightbox.classList.remove('flex');
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    if (lightbox) {
+        lightbox.addEventListener('click', closeLightbox);
+    }
+    if (lightboxClose) {
+        lightboxClose.addEventListener('click', closeLightbox);
+    }
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && lightbox && !lightbox.classList.contains('hidden')) {
+            closeLightbox();
+        }
+    });
+
+    var grid = document.getElementById('image-grid');
+    var btnToReview = document.getElementById('btn-to-review');
+    var selectHint = document.getElementById('select-hint');
+    var selectedFilename = null;
+
+    function setReviewButtonEnabled(enabled) {
+        if (!btnToReview) return;
+        btnToReview.disabled = !enabled;
+        if (enabled) {
+            btnToReview.className = 'text-sm px-4 py-2 bg-primary text-white border border-primary rounded-lg hover:opacity-90 transition-all';
+            btnToReview.classList.remove('bg-slate-200', 'text-slate-400', 'cursor-not-allowed');
+        } else {
+            btnToReview.className = 'text-sm px-4 py-2 bg-slate-200 text-slate-400 border border-slate-200 rounded-lg cursor-not-allowed transition-all disabled:opacity-70';
+            selectedFilename = null;
+        }
+    }
+
+    function goToReview() {
+        if (selectedFilename) {
+            window.location.href = '../review-mode/index.html?img=' + encodeURIComponent(selectedFilename);
+        }
+    }
+
+    if (grid) {
+        grid.addEventListener('click', function(e) {
+            var cell = e.target.closest('#image-grid .aspect-square[data-filename]');
+            var img = cell ? cell.querySelector('img[src]') : null;
+            if (!cell || !img) return;
+            e.preventDefault();
+            var filename = cell.getAttribute('data-filename');
+            if (!filename) return;
+            var wasSelected = cell.classList.contains('ring-2');
+            if (wasSelected) {
+                openLightbox(img.src);
+                return;
+            }
+            grid.querySelectorAll('.aspect-square[data-filename]').forEach(function(c) {
+                c.classList.remove('ring-2', 'ring-primary', 'ring-offset-2');
+            });
+            cell.classList.add('ring-2', 'ring-primary', 'ring-offset-2');
+            selectedFilename = filename;
+            setReviewButtonEnabled(true);
+            if (selectHint) selectHint.classList.remove('hidden');
+        });
+    }
+    if (btnToReview) {
+        btnToReview.addEventListener('click', function() {
+            if (!this.disabled) goToReview();
+        });
+    }
+
+    document.getElementById('gen-btn').addEventListener('click', function() {
+        const btnIcon = document.getElementById('img-gen-icon');
+        const btnText = document.getElementById('img-gen-text');
+        const gridEl = document.getElementById('image-grid');
+
+        if (!btnIcon || !btnText || !gridEl) return;
+
+        const btn = document.getElementById('gen-btn');
+        btn.disabled = true;
+        btnIcon.textContent = 'progress_activity';
+        btnIcon.classList.add('animate-spin');
+        btnText.innerText = '生成中...';
+        if (selectHint) selectHint.classList.add('hidden');
+        setReviewButtonEnabled(false);
+
+        gridEl.innerHTML = [
+            '<div class="aspect-square bg-slate-200 animate-pulse rounded-xl"></div>',
+            '<div class="aspect-square bg-slate-200 animate-pulse rounded-xl"></div>',
+            '<div class="aspect-square bg-slate-200 animate-pulse rounded-xl"></div>'
+        ].join('');
+
+        setTimeout(function() {
+            btn.disabled = false;
+            btnIcon.textContent = 'bolt';
+            btnText.innerText = '再次生成';
+
+            setReviewButtonEnabled(false);
+            if (selectHint) selectHint.classList.remove('hidden');
+
+            gridEl.innerHTML = RESULT_IMGS.map(function(file) {
+                var src = IMG_BASE + file;
+                return '<div class="aspect-square bg-white rounded-xl border border-slate-200 overflow-hidden cursor-pointer hover:ring-2 hover:ring-primary hover:ring-offset-2 transition-all" data-filename="' + file + '">' +
+                    '<img src="' + src + '" alt="生成結果" class="w-full h-full object-cover">' +
+                    '</div>';
+            }).join('');
+        }, 1000);
+    });
+})();

@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>客戶總覽 - 續續院</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#105B58", secondary: "#FF6D2C" },
+            fontFamily: { sans: ["Noto Sans TC", "Inter", "sans-serif"] },
+          },
+        },
+      };
+    </script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800">
+    <!-- Header -->
+    <header
+      class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/90 backdrop-blur-md px-6 py-3"
+    >
+      <div class="w-full flex items-center justify-between">
+        <div class="flex items-center gap-8">
+          <div
+            class="flex items-center gap-3 cursor-pointer"
+            onclick="window.location.href = '../index.html'"
+          >
+            <img
+              src="../img/LOGO.png"
+              alt="續續院 ContiNEW"
+              class="h-10 w-auto"
+            />
+          </div>
+          <nav class="hidden md:flex items-center gap-6">
+            <a
+              class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+              href="index.html"
+              >案件總覽</a
+            >
+            <a
+              class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+              href="../final-output/index.html"
+              >成果產出</a
+            >
+            <a class="text-sm font-bold text-primary" href="customers.html"
+              >客戶總覽</a
+            >
+            <span
+              class="text-sm font-medium text-slate-400 cursor-not-allowed"
+              title="開發中"
+              >智識引擎決策器</span
+            >
+          </nav>
+        </div>
+        <div class="relative">
+          <div
+            id="user-avatar"
+            class="h-9 w-9 rounded-full bg-slate-200 overflow-hidden border border-slate-300 cursor-pointer hover:ring-2 hover:ring-primary transition-all"
+          >
+            <img
+              class="h-full w-full object-cover"
+              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=100&h=100&fit=crop&crop=faces"
+              alt="使用者頭像"
+            />
+          </div>
+          <div
+            id="logout-menu"
+            class="hidden absolute right-0 top-12 bg-white rounded-lg shadow-lg border border-slate-200 py-2 min-w-[120px] z-50"
+          >
+            <button
+              id="logout-btn"
+              class="w-full px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 flex items-center gap-2 transition-colors"
+            >
+              <span class="material-symbols-outlined text-base">logout</span>
+              登出
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <div
+      class="flex-col w-full px-6 lg:px-10 py-8 max-w-[1440px] mx-auto min-h-screen"
+    >
+      <div
+        class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8"
+      >
+        <div>
+          <h2 class="text-3xl font-black tracking-tight text-slate-900">
+            客戶總覽
+          </h2>
+          <p class="text-slate-500 mt-1">管理您的客戶資訊與對應案件。</p>
+        </div>
+      </div>
+
+      <div
+        class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6"
+      >
+        <!-- Customer Card 1 -->
+        <div
+          class="customer-card group flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1"
+          data-industry="金融"
+          data-customer-code="A001"
+        >
+          <div class="h-48 overflow-hidden relative">
+            <img
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop"
+              alt="富邦金控"
+            />
+            <div class="absolute top-3 left-3">
+              <span
+                class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/20 text-primary backdrop-blur-sm"
+                >金融</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-slate-400 text-base"
+                >business</span
+              >
+              <span
+                class="text-[11px] font-bold text-slate-400 uppercase tracking-widest"
+                >A001</span
+              >
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight">
+              富邦金控
+            </h3>
+            <p class="text-sm text-slate-500 line-clamp-2 mb-6">
+              金控集團品牌與數位金融相關專案合作。
+            </p>
+            <div
+              class="mt-auto pt-4 flex items-center justify-between gap-3 border-t border-slate-100"
+            >
+              <button
+                class="flex-1 px-4 py-2 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+                onclick="
+                  showCustomerDetail(
+                    'A001',
+                    '富邦金控',
+                    '金融',
+                    '金控集團品牌與數位金融相關專案合作。',
+                  )
+                "
+              >
+                檢視
+              </button>
+              <button
+                class="flex-[1.5] px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-[#0d4a48] rounded-lg transition-colors flex items-center justify-center gap-1"
+                onclick="window.location.href = 'index.html?customer=A001'"
+              >
+                <span class="material-symbols-outlined text-sm"
+                  >folder_open</span
+                >
+                查看案件
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Card 2 -->
+        <div
+          class="customer-card group flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1"
+          data-industry="科技"
+          data-customer-code="A002"
+        >
+          <div class="h-48 overflow-hidden relative">
+            <img
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://images.unsplash.com/photo-1519389950473-47ba0277781c?w=400&h=300&fit=crop"
+              alt="台積電"
+            />
+            <div class="absolute top-3 left-3">
+              <span
+                class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-blue-100 text-blue-700 backdrop-blur-sm"
+                >科技</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-slate-400 text-base"
+                >business</span
+              >
+              <span
+                class="text-[11px] font-bold text-slate-400 uppercase tracking-widest"
+                >A002</span
+              >
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight">
+              台積電
+            </h3>
+            <p class="text-sm text-slate-500 line-clamp-2 mb-6">
+              半導體產業 ESG 與人才品牌溝通專案。
+            </p>
+            <div
+              class="mt-auto pt-4 flex items-center justify-between gap-3 border-t border-slate-100"
+            >
+              <button
+                class="flex-1 px-4 py-2 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+                onclick="
+                  showCustomerDetail(
+                    'A002',
+                    '台積電',
+                    '科技',
+                    '半導體產業 ESG 與人才品牌溝通專案。',
+                  )
+                "
+              >
+                檢視
+              </button>
+              <button
+                class="flex-[1.5] px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-[#0d4a48] rounded-lg transition-colors flex items-center justify-center gap-1"
+                onclick="window.location.href = 'index.html?customer=A002'"
+              >
+                <span class="material-symbols-outlined text-sm"
+                  >folder_open</span
+                >
+                查看案件
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Card 3 -->
+        <div
+          class="customer-card group flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1"
+          data-industry="零售"
+          data-customer-code="A003"
+        >
+          <div class="h-48 overflow-hidden relative">
+            <img
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://images.unsplash.com/photo-1604719312566-8912e9227c6a?w=400&h=300&fit=crop"
+              alt="統一超商"
+            />
+            <div class="absolute top-3 left-3">
+              <span
+                class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-100 text-amber-700 backdrop-blur-sm"
+                >零售</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-slate-400 text-base"
+                >business</span
+              >
+              <span
+                class="text-[11px] font-bold text-slate-400 uppercase tracking-widest"
+                >A003</span
+              >
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight">
+              統一超商
+            </h3>
+            <p class="text-sm text-slate-500 line-clamp-2 mb-6">
+              便利商店通路行銷與節慶 campaign 素材。
+            </p>
+            <div
+              class="mt-auto pt-4 flex items-center justify-between gap-3 border-t border-slate-100"
+            >
+              <button
+                class="flex-1 px-4 py-2 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+                onclick="
+                  showCustomerDetail(
+                    'A003',
+                    '統一超商',
+                    '零售',
+                    '便利商店通路行銷與節慶 campaign 素材。',
+                  )
+                "
+              >
+                檢視
+              </button>
+              <button
+                class="flex-[1.5] px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-[#0d4a48] rounded-lg transition-colors flex items-center justify-center gap-1"
+                onclick="window.location.href = 'index.html?customer=A003'"
+              >
+                <span class="material-symbols-outlined text-sm"
+                  >folder_open</span
+                >
+                查看案件
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Customer Card 4 -->
+        <div
+          class="customer-card group flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1"
+          data-industry="製造"
+          data-customer-code="A004"
+        >
+          <div class="h-48 overflow-hidden relative">
+            <img
+              class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              src="https://images.unsplash.com/photo-1565793298595-6a879b1d9492?w=400&h=300&fit=crop"
+              alt="鴻海精密"
+            />
+            <div class="absolute top-3 left-3">
+              <span
+                class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-slate-100 text-slate-700 backdrop-blur-sm"
+                >製造</span
+              >
+            </div>
+          </div>
+          <div class="p-5 flex flex-col flex-1">
+            <div class="flex items-center gap-2 mb-2">
+              <span class="material-symbols-outlined text-slate-400 text-base"
+                >business</span
+              >
+              <span
+                class="text-[11px] font-bold text-slate-400 uppercase tracking-widest"
+                >A004</span
+              >
+            </div>
+            <h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight">
+              鴻海精密
+            </h3>
+            <p class="text-sm text-slate-500 line-clamp-2 mb-6">
+              電子製造服務與智慧製造形象專案。
+            </p>
+            <div
+              class="mt-auto pt-4 flex items-center justify-between gap-3 border-t border-slate-100"
+            >
+              <button
+                class="flex-1 px-4 py-2 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors"
+                onclick="
+                  showCustomerDetail(
+                    'A004',
+                    '鴻海精密',
+                    '製造',
+                    '電子製造服務與智慧製造形象專案。',
+                  )
+                "
+              >
+                檢視
+              </button>
+              <button
+                class="flex-[1.5] px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-[#0d4a48] rounded-lg transition-colors flex items-center justify-center gap-1"
+                onclick="window.location.href = 'index.html?customer=A004'"
+              >
+                <span class="material-symbols-outlined text-sm"
+                  >folder_open</span
+                >
+                查看案件
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 新增客戶 -->
+        <div
+          class="customer-card flex flex-col items-center justify-center bg-slate-50 border-2 border-dashed border-slate-200 rounded-xl p-8 hover:border-secondary/50 hover:bg-slate-100 transition-all group cursor-pointer"
+          data-industry="new"
+          onclick="openAddCustomerModal()"
+        >
+          <div
+            class="h-16 w-16 rounded-full bg-white shadow-md flex items-center justify-center text-slate-400 group-hover:text-secondary transition-colors mb-4"
+          >
+            <span class="material-symbols-outlined text-3xl">add</span>
+          </div>
+          <h3 class="text-lg font-bold text-slate-900 mb-1">新增客戶</h3>
+          <p class="text-sm text-slate-500 text-center">建立新的客戶資料。</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 客戶簡述 Modal -->
+    <div
+      id="customer-detail-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/50"
+    >
+      <div
+        class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+      >
+        <div
+          class="p-6 border-b border-slate-200 flex items-center justify-between"
+        >
+          <h3 class="text-xl font-bold text-slate-900">客戶簡述</h3>
+          <div class="flex items-center gap-2">
+            <button
+              id="customer-modal-edit-btn"
+              class="px-4 py-2 rounded-lg text-sm font-bold text-primary hover:bg-primary/10 transition-colors flex items-center gap-1"
+            >
+              <span class="material-symbols-outlined text-base">edit</span>編輯
+            </button>
+            <button
+              id="close-customer-modal"
+              class="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+            >
+              <span class="material-symbols-outlined">close</span>
+            </button>
+          </div>
+        </div>
+        <div class="p-6 space-y-5">
+          <!-- 檢視模式 -->
+          <div id="customer-modal-view">
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-500"
+                >客戶編號</label
+              >
+              <p
+                id="modal-customer-code"
+                class="text-slate-900 font-medium"
+              ></p>
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-500"
+                >客戶名稱</label
+              >
+              <p
+                id="modal-customer-name"
+                class="text-slate-900 font-medium"
+              ></p>
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-500"
+                >產業別</label
+              >
+              <p
+                id="modal-customer-industry"
+                class="text-slate-900 font-medium"
+              ></p>
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-500"
+                >客戶描述</label
+              >
+              <p
+                id="modal-customer-description"
+                class="text-slate-700 leading-relaxed whitespace-pre-wrap"
+              ></p>
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-500"
+                >相關案件</label
+              >
+              <ul
+                id="modal-customer-cases"
+                class="space-y-2 text-sm text-slate-700"
+              ></ul>
+              <a
+                id="modal-customer-cases-link"
+                href="#"
+                class="inline-flex items-center gap-1 mt-2 text-primary font-bold hover:underline"
+              >
+                <span class="material-symbols-outlined text-base"
+                  >folder_open</span
+                >
+                前往案件總覽查看
+              </a>
+            </div>
+          </div>
+          <!-- 編輯模式 -->
+          <div id="customer-modal-edit" class="hidden space-y-5">
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-700"
+                >客戶編號</label
+              >
+              <input
+                id="edit-customer-code"
+                type="text"
+                readonly
+                class="w-full px-4 py-3 rounded-lg border border-slate-200 bg-slate-50 text-slate-600 outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-700"
+                >客戶名稱</label
+              >
+              <input
+                id="edit-customer-name"
+                type="text"
+                placeholder="例：玉山銀行"
+                class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              />
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-700"
+                >產業別</label
+              >
+              <select
+                id="edit-customer-industry"
+                class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+              >
+                <option value="金融">金融</option>
+                <option value="科技">科技</option>
+                <option value="零售">零售</option>
+                <option value="製造">製造</option>
+                <option value="其他">其他</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-700"
+                >客戶描述</label
+              >
+              <textarea
+                id="edit-customer-description"
+                rows="3"
+                placeholder="簡述客戶背景或合作方向"
+                class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none"
+              ></textarea>
+            </div>
+            <div>
+              <label class="block text-sm font-bold mb-2 text-slate-700"
+                >歸屬案件（可勾選現存案件歸屬此客戶）</label
+              >
+              <div
+                id="edit-customer-cases-checkboxes"
+                class="max-h-48 overflow-y-auto space-y-2 rounded-lg border border-slate-200 p-3 bg-slate-50"
+              ></div>
+            </div>
+          </div>
+        </div>
+        <div class="p-6 border-t border-slate-200 flex gap-3">
+          <button
+            id="customer-modal-save-btn"
+            type="button"
+            class="hidden flex-1 px-6 py-3 rounded-lg bg-primary text-white text-sm font-bold hover:opacity-90 transition-colors"
+          >
+            儲存
+          </button>
+          <button
+            type="button"
+            class="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-colors"
+            onclick="closeCustomerDetailModal()"
+          >
+            關閉
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- 新增客戶 Modal（Demo） -->
+    <div
+      id="add-customer-modal"
+      class="fixed inset-0 z-50 hidden items-center justify-center p-4 bg-black/50"
+    >
+      <div
+        class="bg-white rounded-xl shadow-xl max-w-lg w-full max-h-[90vh] overflow-y-auto"
+      >
+        <div
+          class="p-6 border-b border-slate-200 flex items-center justify-between"
+        >
+          <h3 class="text-xl font-bold text-slate-900">新增客戶</h3>
+          <button
+            type="button"
+            onclick="closeAddCustomerModal()"
+            class="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+          >
+            <span class="material-symbols-outlined">close</span>
+          </button>
+        </div>
+        <form id="add-customer-form" class="p-6 space-y-5">
+          <div>
+            <label class="block text-sm font-bold mb-2 text-slate-700"
+              >客戶編號</label
+            >
+            <input
+              type="text"
+              name="code"
+              placeholder="例：A005"
+              class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2 text-slate-700"
+              >客戶名稱</label
+            >
+            <input
+              type="text"
+              name="name"
+              placeholder="例：玉山銀行"
+              class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+            />
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2 text-slate-700"
+              >產業別</label
+            >
+            <select
+              name="industry"
+              class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none"
+            >
+              <option value="">請選擇</option>
+              <option value="金融">金融</option>
+              <option value="科技">科技</option>
+              <option value="零售">零售</option>
+              <option value="製造">製造</option>
+              <option value="其他">其他</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2 text-slate-700"
+              >客戶描述</label
+            >
+            <textarea
+              name="description"
+              rows="3"
+              placeholder="簡述客戶背景或合作方向"
+              class="w-full px-4 py-3 rounded-lg border border-slate-200 focus:border-primary focus:ring-1 focus:ring-primary outline-none resize-none"
+            ></textarea>
+          </div>
+          <div>
+            <label class="block text-sm font-bold mb-2 text-slate-700"
+              >歸屬案件（可勾選現存案件歸屬此客戶）</label
+            >
+            <div
+              id="add-customer-cases-checkboxes"
+              class="max-h-48 overflow-y-auto space-y-2 rounded-lg border border-slate-200 p-3 bg-slate-50"
+            ></div>
+          </div>
+        </form>
+        <div class="p-6 border-t border-slate-200 flex gap-3">
+          <button
+            type="button"
+            onclick="closeAddCustomerModal()"
+            class="flex-1 px-6 py-3 rounded-lg border border-slate-200 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-colors"
+          >
+            取消
+          </button>
+          <button
+            type="button"
+            onclick="submitAddCustomerDemo()"
+            class="flex-1 px-6 py-3 rounded-lg bg-primary text-white text-sm font-bold hover:opacity-90 transition-colors"
+          >
+            送出（Demo）
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      // 客戶對應案件（與案件總覽一致）
+      const CUSTOMER_CASES = {
+        A001: [
+          { name: "2026企業數位智識庫", status: "進行中", type: "多媒體生成" },
+          { name: "數位金融形象影片", status: "進行中", type: "多媒體生成" },
+          { name: "理財講座系列素材", status: "已結案", type: "社群媒體素材" },
+        ],
+        A002: [
+          { name: "Q3 競品分析報告", status: "已結案", type: "文檔分析" },
+          { name: "ESG 永續報告視覺", status: "進行中", type: "多媒體生成" },
+          { name: "人才招募品牌廣告", status: "已結案", type: "整合行銷活動" },
+        ],
+        A003: [
+          { name: "中秋禮盒 campaign", status: "進行中", type: "整合行銷活動" },
+          { name: "鮮食新品線上行銷", status: "已結案", type: "社群媒體素材" },
+        ],
+        A004: [
+          { name: "智慧製造白皮書", status: "進行中", type: "文檔分析" },
+          { name: "廠區安全宣導影片", status: "已結案", type: "多媒體生成" },
+        ],
+      };
+
+      // 現存案件清單（用於新增客戶時勾選歸屬，由 CUSTOMER_CASES 扁平化）
+      function getAllCasesList() {
+        const set = new Set();
+        const list = [];
+        Object.values(CUSTOMER_CASES).forEach((cases) => {
+          cases.forEach((c) => {
+            if (!set.has(c.name)) {
+              set.add(c.name);
+              list.push({ name: c.name, type: c.type, status: c.status });
+            }
+          });
+        });
+        return list;
+      }
+
+      function openAddCustomerModal() {
+        const modal = document.getElementById("add-customer-modal");
+        const container = document.getElementById(
+          "add-customer-cases-checkboxes",
+        );
+        const allCases = getAllCasesList();
+        container.innerHTML = allCases
+          .map(
+            (c) =>
+              '<label class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-white cursor-pointer">' +
+              '<input type="checkbox" name="case" value="' +
+              encodeURIComponent(c.name) +
+              '" class="rounded border-slate-300 text-primary focus:ring-primary" />' +
+              '<span class="font-medium text-slate-800">' +
+              c.name +
+              "</span>" +
+              '<span class="text-slate-400 text-xs">' +
+              c.type +
+              "</span>" +
+              "</label>",
+          )
+          .join("");
+        if (allCases.length === 0) {
+          container.innerHTML =
+            '<p class="text-slate-500 text-sm py-2">目前尚無案件可歸屬</p>';
+        }
+        document.getElementById("add-customer-form").reset();
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      function closeAddCustomerModal() {
+        const modal = document.getElementById("add-customer-modal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+
+      function submitAddCustomerDemo() {
+        const form = document.getElementById("add-customer-form");
+        const code = (form.code.value || "").trim().toUpperCase();
+        const name = (form.name.value || "").trim();
+        const industry = form.industry.value || "";
+        const description = (form.description.value || "").trim();
+        const caseCheckboxes = form.querySelectorAll(
+          'input[name="case"]:checked',
+        );
+        const assignedCases = [];
+        caseCheckboxes.forEach((cb) => {
+          const caseName = decodeURIComponent(cb.value);
+          const allCases = getAllCasesList();
+          const found = allCases.find((c) => c.name === caseName);
+          if (found) assignedCases.push(found);
+        });
+
+        if (!code || !name) {
+          alert("請填寫客戶編號與客戶名稱");
+          return;
+        }
+
+        if (CUSTOMER_CASES[code]) {
+          alert("此客戶編號已存在，請使用其他編號（Demo）");
+          return;
+        }
+
+        CUSTOMER_CASES[code] = assignedCases;
+        const grid = document.querySelector(".grid");
+        const newCard = document.createElement("div");
+        newCard.className =
+          "customer-card group flex flex-col bg-white rounded-xl border border-slate-200 overflow-hidden hover:shadow-xl transition-all hover:-translate-y-1";
+        newCard.setAttribute("data-industry", industry || "其他");
+        newCard.setAttribute("data-customer-code", code);
+        newCard.setAttribute("data-customer-name", name || "未命名");
+        newCard.setAttribute("data-customer-industry", industry || "其他");
+        newCard.setAttribute("data-customer-description", description || "");
+        newCard.innerHTML =
+          '<div class="h-48 overflow-hidden relative">' +
+          '<img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" src="https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&h=300&fit=crop" alt="" />' +
+          '<div class="absolute top-3 left-3 flex gap-2">' +
+          '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider bg-primary/20 text-primary backdrop-blur-sm">' +
+          (industry || "其他") +
+          "</span>" +
+          '<span class="px-2.5 py-1 rounded-full text-[10px] font-bold bg-secondary/90 text-white">Demo</span>' +
+          "</div>" +
+          "</div>" +
+          '<div class="p-5 flex flex-col flex-1">' +
+          '<div class="flex items-center gap-2 mb-2">' +
+          '<span class="material-symbols-outlined text-slate-400 text-base">business</span>' +
+          '<span class="text-[11px] font-bold text-slate-400 uppercase tracking-widest">' +
+          code +
+          "</span>" +
+          "</div>" +
+          '<h3 class="text-lg font-bold text-slate-900 mb-2 leading-tight">' +
+          (name || "未命名") +
+          "</h3>" +
+          '<p class="text-sm text-slate-500 line-clamp-2 mb-6">' +
+          (description || "—") +
+          "</p>" +
+          '<div class="mt-auto pt-4 flex items-center justify-between gap-3 border-t border-slate-100">' +
+          '<button type="button" class="flex-1 px-4 py-2 text-sm font-bold text-slate-700 bg-slate-100 hover:bg-slate-200 rounded-lg transition-colors btn-view-customer">檢視</button>' +
+          '<a href="index.html?customer=' +
+          encodeURIComponent(code) +
+          '" class="flex-[1.5] px-4 py-2 text-sm font-bold text-white bg-primary hover:bg-[#0d4a48] rounded-lg transition-colors flex items-center justify-center gap-1"><span class="material-symbols-outlined text-sm">folder_open</span>查看案件</a>' +
+          "</div>" +
+          "</div>";
+        newCard
+          .querySelector(".btn-view-customer")
+          .addEventListener("click", function () {
+            showCustomerDetail(
+              newCard.dataset.customerCode,
+              newCard.dataset.customerName,
+              newCard.dataset.customerIndustry,
+              newCard.dataset.customerDescription,
+            );
+          });
+        const addCard = document.querySelector(
+          ".customer-card[data-industry='new']",
+        );
+        grid.insertBefore(newCard, addCard);
+        closeAddCustomerModal();
+        alert("已新增客戶（此為 Demo，重新整理頁面會還原）");
+      }
+
+      document
+        .getElementById("add-customer-modal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeAddCustomerModal();
+        });
+
+      // 使用者頭像與登出
+      const userAvatar = document.getElementById("user-avatar");
+      const logoutMenu = document.getElementById("logout-menu");
+      const logoutBtn = document.getElementById("logout-btn");
+
+      userAvatar.addEventListener("click", function (e) {
+        e.stopPropagation();
+        logoutMenu.classList.toggle("hidden");
+      });
+      document.addEventListener("click", function (e) {
+        if (!userAvatar.contains(e.target) && !logoutMenu.contains(e.target)) {
+          logoutMenu.classList.add("hidden");
+        }
+      });
+      logoutBtn.addEventListener("click", function () {
+        if (confirm("確定要登出嗎？")) {
+          window.location.href = "../index.html";
+        }
+      });
+
+      // 客戶簡述 Modal（含相關案件與編輯）
+      let currentEditingCustomerCode = "";
+
+      function showCustomerDetail(code, name, industry, description) {
+        currentEditingCustomerCode = code;
+        const modal = document.getElementById("customer-detail-modal");
+        document.getElementById("modal-customer-code").textContent = code;
+        document.getElementById("modal-customer-name").textContent = name;
+        document.getElementById("modal-customer-industry").textContent =
+          industry;
+        document.getElementById("modal-customer-description").textContent =
+          description;
+
+        const casesList = document.getElementById("modal-customer-cases");
+        const casesLink = document.getElementById("modal-customer-cases-link");
+        casesLink.href = "index.html?customer=" + encodeURIComponent(code);
+        const cases = CUSTOMER_CASES[code] || [];
+        casesList.innerHTML = cases
+          .map(
+            (c) =>
+              '<li class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-slate-50 border border-slate-100">' +
+              '<span class="px-2 py-0.5 rounded text-[10px] font-bold ' +
+              (c.status === "進行中"
+                ? "bg-orange-100 text-secondary"
+                : "bg-green-100 text-green-700") +
+              '">' +
+              c.status +
+              "</span>" +
+              "<span class='font-medium'>" +
+              c.name +
+              "</span>" +
+              "<span class='text-slate-400 text-xs'>" +
+              c.type +
+              "</span>" +
+              "</li>",
+          )
+          .join("");
+        if (cases.length === 0) {
+          casesList.innerHTML = '<li class="text-slate-500 py-2">尚無案件</li>';
+        }
+
+        switchToCustomerViewMode();
+        modal.classList.remove("hidden");
+        modal.classList.add("flex");
+      }
+
+      function switchToCustomerViewMode() {
+        document
+          .getElementById("customer-modal-view")
+          .classList.remove("hidden");
+        document.getElementById("customer-modal-edit").classList.add("hidden");
+        document
+          .getElementById("customer-modal-edit-btn")
+          .classList.remove("hidden");
+        document
+          .getElementById("customer-modal-save-btn")
+          .classList.add("hidden");
+      }
+
+      function switchToCustomerEditMode() {
+        const code = currentEditingCustomerCode;
+        document.getElementById("edit-customer-code").value = code;
+        document.getElementById("edit-customer-name").value =
+          document.getElementById("modal-customer-name").textContent;
+        document.getElementById("edit-customer-industry").value =
+          document.getElementById("modal-customer-industry").textContent ||
+          "其他";
+        document.getElementById("edit-customer-description").value =
+          document.getElementById("modal-customer-description").textContent;
+
+        const container = document.getElementById(
+          "edit-customer-cases-checkboxes",
+        );
+        const allCases = getAllCasesList();
+        const currentCases = (CUSTOMER_CASES[code] || []).map((c) => c.name);
+        container.innerHTML = allCases
+          .map(
+            (c) =>
+              '<label class="flex items-center gap-3 py-2 px-3 rounded-lg hover:bg-white cursor-pointer">' +
+              '<input type="checkbox" name="edit-case" value="' +
+              encodeURIComponent(c.name) +
+              '" ' +
+              (currentCases.indexOf(c.name) >= 0 ? "checked" : "") +
+              ' class="rounded border-slate-300 text-primary focus:ring-primary" />' +
+              '<span class="font-medium text-slate-800">' +
+              c.name +
+              "</span>" +
+              '<span class="text-slate-400 text-xs">' +
+              c.type +
+              "</span>" +
+              "</label>",
+          )
+          .join("");
+        if (allCases.length === 0) {
+          container.innerHTML =
+            '<p class="text-slate-500 text-sm py-2">目前尚無案件可歸屬</p>';
+        }
+
+        document.getElementById("customer-modal-view").classList.add("hidden");
+        document
+          .getElementById("customer-modal-edit")
+          .classList.remove("hidden");
+        document
+          .getElementById("customer-modal-edit-btn")
+          .classList.add("hidden");
+        document
+          .getElementById("customer-modal-save-btn")
+          .classList.remove("hidden");
+      }
+
+      function saveCustomerEdit() {
+        const code = currentEditingCustomerCode;
+        const name = (
+          document.getElementById("edit-customer-name").value || ""
+        ).trim();
+        const industry =
+          document.getElementById("edit-customer-industry").value || "其他";
+        const description = (
+          document.getElementById("edit-customer-description").value || ""
+        ).trim();
+        const caseCheckboxes = document.querySelectorAll(
+          '#edit-customer-cases-checkboxes input[name="edit-case"]:checked',
+        );
+        const assignedCases = [];
+        const allCases = getAllCasesList();
+        caseCheckboxes.forEach((cb) => {
+          const caseName = decodeURIComponent(cb.value);
+          const found = allCases.find((c) => c.name === caseName);
+          if (found) assignedCases.push(found);
+        });
+
+        if (!name) {
+          alert("請填寫客戶名稱");
+          return;
+        }
+
+        CUSTOMER_CASES[code] = assignedCases;
+        document.getElementById("modal-customer-name").textContent = name;
+        document.getElementById("modal-customer-industry").textContent =
+          industry;
+        document.getElementById("modal-customer-description").textContent =
+          description;
+
+        const casesList = document.getElementById("modal-customer-cases");
+        casesList.innerHTML = assignedCases
+          .map(
+            (c) =>
+              '<li class="flex items-center gap-2 py-1.5 px-3 rounded-lg bg-slate-50 border border-slate-100">' +
+              '<span class="px-2 py-0.5 rounded text-[10px] font-bold ' +
+              (c.status === "進行中"
+                ? "bg-orange-100 text-secondary"
+                : "bg-green-100 text-green-700") +
+              '">' +
+              c.status +
+              "</span>" +
+              "<span class='font-medium'>" +
+              c.name +
+              "</span>" +
+              "<span class='text-slate-400 text-xs'>" +
+              c.type +
+              "</span>" +
+              "</li>",
+          )
+          .join("");
+        if (assignedCases.length === 0) {
+          casesList.innerHTML = '<li class="text-slate-500 py-2">尚無案件</li>';
+        }
+
+        const card = document.querySelector(
+          '.customer-card[data-customer-code="' + code + '"]',
+        );
+        if (card) {
+          card.setAttribute("data-industry", industry);
+          card.setAttribute("data-customer-name", name);
+          card.setAttribute("data-customer-industry", industry);
+          card.setAttribute("data-customer-description", description);
+          const h3 = card.querySelector("h3");
+          const descP = card.querySelector(".line-clamp-2");
+          const industryBadge = card.querySelector(".absolute span");
+          if (h3) h3.textContent = name;
+          if (descP) descP.textContent = description || "—";
+          if (
+            industryBadge &&
+            !industryBadge.classList.contains("bg-secondary")
+          ) {
+            industryBadge.textContent = industry;
+          }
+        }
+
+        switchToCustomerViewMode();
+        alert("已儲存（此為 Demo，重新整理頁面會還原）");
+      }
+
+      function closeCustomerDetailModal() {
+        switchToCustomerViewMode();
+        const modal = document.getElementById("customer-detail-modal");
+        modal.classList.add("hidden");
+        modal.classList.remove("flex");
+      }
+
+      document
+        .getElementById("customer-modal-edit-btn")
+        .addEventListener("click", switchToCustomerEditMode);
+      document
+        .getElementById("customer-modal-save-btn")
+        .addEventListener("click", saveCustomerEdit);
+
+      document
+        .getElementById("close-customer-modal")
+        .addEventListener("click", closeCustomerDetailModal);
+      document
+        .getElementById("customer-detail-modal")
+        .addEventListener("click", function (e) {
+          if (e.target === this) closeCustomerDetailModal();
+        });
+    </script>
+  </body>
+</html>

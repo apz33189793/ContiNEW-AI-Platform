@@ -1,85 +1,151 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="zh-Hant">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>審核模式 - 續續院</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet"/>
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+      rel="stylesheet"
+    />
     <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: { "primary": "#105B58", "secondary": "#FF6D2C" },
-                    fontFamily: { "sans": ["Noto Sans TC", "Inter", "sans-serif"] }
-                }
-            }
-        }
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: { primary: "#105B58", secondary: "#FF6D2C" },
+            fontFamily: { sans: ["Noto Sans TC", "Inter", "sans-serif"] },
+          },
+        },
+      };
     </script>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="bg-slate-50 text-slate-800 h-screen overflow-hidden">
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body class="bg-slate-50 text-slate-800 h-screen overflow-hidden">
     <div class="flex h-full">
-        <aside class="w-64 border-r border-slate-200 bg-white flex flex-col shrink-0">
-             <div class="p-4 border-b border-slate-200">
-                <h3 class="font-semibold text-sm">待審核資產</h3>
-            </div>
-            <div class="flex-1 overflow-y-auto p-2 space-y-2">
-                <div data-asset="image" class="asset-item flex items-center gap-3 p-2 rounded-lg bg-primary/10 text-primary cursor-pointer border-l-4 border-primary">
-                    <span class="material-symbols-outlined text-lg">image</span>
-                    <span class="text-sm font-medium">Generated_01.png</span>
-                </div>
-                <div data-asset="meeting" class="asset-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border-l-4 border-transparent">
-                    <span class="material-symbols-outlined text-lg text-slate-400">description</span>
-                    <span class="text-sm font-medium">會議記錄.docx</span>
-                </div>
-                <div data-asset="script" class="asset-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border-l-4 border-transparent">
-                    <span class="material-symbols-outlined text-lg text-slate-400">description</span>
-                    <span class="text-sm font-medium">OTV形象影片腳本.doc</span>
-                </div>
-                <div data-asset="report" class="asset-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border-l-4 border-transparent">
-                    <span class="material-symbols-outlined text-lg text-slate-400">description</span>
-                    <span class="text-sm font-medium">IMC策略報告.doc</span>
-                </div>
-            </div>
-        </aside>
-        
-        <div class="flex-1 flex flex-col bg-slate-50 p-6 overflow-y-auto">
-             <div id="preview-area" class="flex-1 flex items-center justify-center bg-slate-200/50 rounded-xl border border-slate-200 mb-6 relative min-h-0 p-6 overflow-auto">
-                 <img id="preview-image" src="https://images.unsplash.com/photo-1522071820081-009f0129c71c?w=800&h=800&fit=crop" class="max-h-full max-w-full rounded shadow-lg object-contain" />
-                 <div id="preview-text" class="hidden bg-white rounded-lg p-6 shadow-sm w-full max-w-2xl text-slate-700 text-sm leading-relaxed whitespace-pre-wrap"></div>
-             </div>
-             
-             <div class="h-48 bg-white border border-slate-200 rounded-xl flex">
-                 <div class="w-1/2 p-6 border-r border-slate-200">
-                     <h4 class="font-bold text-sm mb-2 flex gap-2 items-center">
-                        <span class="material-symbols-outlined text-primary">edit_note</span>指令編輯
-                     </h4>
-                     <textarea id="instruction-input" class="w-full h-24 text-sm border-slate-200 rounded-lg bg-slate-50 resize-none">High-fidelity digital art, modern office, blue theme...</textarea>
-                 </div>
-                 <div class="w-1/2 p-6 flex flex-col items-center justify-center gap-4">
-                     <div class="flex gap-4">
-                         <button class="px-8 py-3 bg-primary text-white rounded-xl font-bold shadow-lg hover:opacity-90" onclick="window.location.href='../final-output/index.html'">
-                             <span class="material-symbols-outlined align-middle mr-1">check_circle</span> 通過
-                         </button>
-                         <button class="px-8 py-3 bg-secondary text-white rounded-xl font-bold shadow-lg hover:opacity-90" onclick="window.location.href='../image-gen/index.html'">
-                            <span class="material-symbols-outlined align-middle mr-1">cancel</span> 退回
-                        </button>
-                     </div>
-                 </div>
-             </div>
+      <aside
+        class="w-64 border-r border-slate-200 bg-white flex flex-col shrink-0"
+      >
+        <div class="p-4 border-b border-slate-200">
+          <h3 class="font-semibold text-sm">待審核資產</h3>
         </div>
+        <div class="flex-1 overflow-y-auto p-2 space-y-2">
+          <div
+            data-asset="image"
+            class="asset-item flex items-center gap-3 p-2 rounded-lg bg-primary/10 text-primary cursor-pointer border-l-4 border-primary"
+          >
+            <span class="material-symbols-outlined text-lg">image</span>
+            <span class="text-sm font-medium">平面/視覺產出.png</span>
+          </div>
+          <div
+            data-asset="meeting"
+            class="asset-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border-l-4 border-transparent"
+          >
+            <span class="material-symbols-outlined text-lg text-slate-400"
+              >description</span
+            >
+            <span class="text-sm font-medium">會議記錄.docx</span>
+          </div>
+          <div
+            data-asset="script"
+            class="asset-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border-l-4 border-transparent"
+          >
+            <span class="material-symbols-outlined text-lg text-slate-400"
+              >description</span
+            >
+            <span class="text-sm font-medium">OTV形象影片腳本.doc</span>
+          </div>
+          <div
+            data-asset="report"
+            class="asset-item flex items-center gap-3 p-2 rounded-lg hover:bg-slate-50 cursor-pointer border-l-4 border-transparent"
+          >
+            <span class="material-symbols-outlined text-lg text-slate-400"
+              >description</span
+            >
+            <span class="text-sm font-medium">IMC策略報告.doc</span>
+          </div>
+        </div>
+      </aside>
+
+      <div class="flex-1 flex flex-col bg-slate-50 p-6 overflow-y-auto">
+        <div
+          id="preview-area"
+          class="flex-1 flex items-center justify-center bg-slate-200/50 rounded-xl border border-slate-200 mb-6 relative min-h-0 p-6 overflow-auto"
+        >
+          <img
+            id="preview-image"
+            src="../img/img-gen-01.png"
+            class="max-h-full max-w-full rounded shadow-lg object-contain"
+          />
+          <div
+            id="preview-text"
+            class="hidden bg-white rounded-lg p-6 shadow-sm w-full max-w-2xl text-slate-700 text-sm leading-relaxed whitespace-pre-wrap"
+          ></div>
+        </div>
+
+        <div class="h-48 bg-white border border-slate-200 rounded-xl flex">
+          <div class="w-1/2 p-6 border-r border-slate-200">
+            <h4 class="font-bold text-sm mb-2 flex gap-2 items-center">
+              <span class="material-symbols-outlined text-primary"
+                >edit_note</span
+              >指令編輯
+            </h4>
+            <textarea
+              id="instruction-input"
+              class="w-full h-24 text-sm border-slate-200 rounded-lg bg-slate-50 resize-none"
+            >
+請將我的圖片改成專業風格的導師形象</textarea
+            >
+          </div>
+          <div
+            class="w-1/2 p-6 flex flex-col items-center justify-center gap-4"
+          >
+            <div class="flex gap-4">
+              <button
+                class="px-8 py-3 bg-primary text-white rounded-xl font-bold shadow-lg hover:opacity-90"
+                onclick="window.location.href = '../final-output/index.html'"
+              >
+                <span class="material-symbols-outlined align-middle mr-1"
+                  >check_circle</span
+                >
+                通過
+              </button>
+              <button
+                class="px-8 py-3 bg-secondary text-white rounded-xl font-bold shadow-lg hover:opacity-90"
+                onclick="window.location.href = '../image-gen/index.html'"
+              >
+                <span class="material-symbols-outlined align-middle mr-1"
+                  >cancel</span
+                >
+                退回
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
     <script src="script.js"></script>
     <script>
-        const assetData = {
-            image: {
-                preview: 'image',
-                instruction: 'High-fidelity digital art, modern office, blue theme...'
-            },
-            meeting: {
-                preview: 'text',
-                text: `【2024 Q4 品牌行銷專案 第三次專案會議記錄】
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var imgParam = params.get("img");
+        var previewImg = document.getElementById("preview-image");
+        if (imgParam && previewImg) {
+          previewImg.src = "../img/" + imgParam;
+        }
+      })();
+      const assetData = {
+        image: {
+          preview: "image",
+          instruction:
+            "High-fidelity digital art, modern office, blue theme...",
+        },
+        meeting: {
+          preview: "text",
+          text: `【2024 Q4 品牌行銷專案 第三次專案會議記錄】
 
 會議資訊
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
@@ -132,11 +198,11 @@
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 時間：2024 年 9 月 22 日（週五）14:00
 議程：主視覺審核、社群內容腳本討論`,
-                instruction: '請摘要會議重點並標註行動項目...'
-            },
-            script: {
-                preview: 'text',
-                text: `【OTV 品牌形象影片腳本 v.2】
+          instruction: "請摘要會議重點並標註行動項目...",
+        },
+        script: {
+          preview: "text",
+          text: `【OTV 品牌形象影片腳本 v.2】
 
 專案：2024 年度品牌形象影片
 時長：60 秒（含尾卡）
@@ -200,11 +266,11 @@
 • BGM 建議：鋼琴+弦樂，節奏中等偏慢，情感飽滿
 • 旁白錄音：需錄製國語、英語雙語版本
 • 字幕：需含繁中、簡中、英文字幕檔`,
-                instruction: '請優化腳本節奏與轉場描述...'
-            },
-            report: {
-                preview: 'text',
-                text: `【2024 整合行銷傳播策略規劃報告】
+          instruction: "請優化腳本節奏與轉場描述...",
+        },
+        report: {
+          preview: "text",
+          text: `【2024 整合行銷傳播策略規劃報告】
 
 續續院 ContiNEW 企業客戶事業處
 機密文件 · 僅供內部參考
@@ -316,36 +382,48 @@ Q4（年度收尾）：550 萬 — 節慶行銷、年度回顧、明年預熱
 
 報告完成日期：2024 年 9 月
 版本：v1.2`,
-                instruction: '請補充競品比較章節...'
-            }
-        };
+          instruction: "請補充競品比較章節...",
+        },
+      };
 
-        document.querySelectorAll('.asset-item').forEach(item => {
-            item.addEventListener('click', function() {
-                const asset = this.dataset.asset;
-                document.querySelectorAll('.asset-item').forEach(i => {
-                    i.classList.remove('bg-primary/10', 'text-primary', 'border-primary');
-                    i.classList.add('border-transparent');
-                    i.querySelector('.material-symbols-outlined').classList.remove('text-primary');
-                    i.querySelector('.material-symbols-outlined').classList.add('text-slate-400');
-                });
-                this.classList.add('bg-primary/10', 'text-primary', 'border-primary');
-                this.classList.remove('border-transparent');
-                this.querySelector('.material-symbols-outlined').classList.remove('text-slate-400');
-                this.querySelector('.material-symbols-outlined').classList.add('text-primary');
+      document.querySelectorAll(".asset-item").forEach((item) => {
+        item.addEventListener("click", function () {
+          const asset = this.dataset.asset;
+          document.querySelectorAll(".asset-item").forEach((i) => {
+            i.classList.remove(
+              "bg-primary/10",
+              "text-primary",
+              "border-primary",
+            );
+            i.classList.add("border-transparent");
+            i.querySelector(".material-symbols-outlined").classList.remove(
+              "text-primary",
+            );
+            i.querySelector(".material-symbols-outlined").classList.add(
+              "text-slate-400",
+            );
+          });
+          this.classList.add("bg-primary/10", "text-primary", "border-primary");
+          this.classList.remove("border-transparent");
+          this.querySelector(".material-symbols-outlined").classList.remove(
+            "text-slate-400",
+          );
+          this.querySelector(".material-symbols-outlined").classList.add(
+            "text-primary",
+          );
 
-                const data = assetData[asset];
-                if (data.preview === 'image') {
-                    document.getElementById('preview-image').classList.remove('hidden');
-                    document.getElementById('preview-text').classList.add('hidden');
-                } else {
-                    document.getElementById('preview-image').classList.add('hidden');
-                    document.getElementById('preview-text').classList.remove('hidden');
-                    document.getElementById('preview-text').textContent = data.text;
-                }
-                document.getElementById('instruction-input').value = data.instruction;
-            });
+          const data = assetData[asset];
+          if (data.preview === "image") {
+            document.getElementById("preview-image").classList.remove("hidden");
+            document.getElementById("preview-text").classList.add("hidden");
+          } else {
+            document.getElementById("preview-image").classList.add("hidden");
+            document.getElementById("preview-text").classList.remove("hidden");
+            document.getElementById("preview-text").textContent = data.text;
+          }
+          document.getElementById("instruction-input").value = data.instruction;
         });
+      });
     </script>
-</body>
+  </body>
 </html>

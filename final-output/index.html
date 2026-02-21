@@ -47,7 +47,21 @@
               href="../dashboard/index.html"
               >案件總覽</a
             >
-            <a class="text-sm font-bold text-primary" href="#">成果產出</a>
+
+            <a class="text-sm font-bold text-primary" href="index.html"
+              >成果產出</a
+            >
+
+            <a
+              class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+              href="../dashboard/customers.html"
+              >客戶總覽</a
+            >
+            <span
+              class="text-sm font-medium text-slate-400 cursor-not-allowed"
+              title="開發中"
+              >智識引擎決策器</span
+            >
           </nav>
         </div>
         <div class="relative">
@@ -105,10 +119,12 @@
         <div
           class="bg-white rounded-2xl border border-slate-200 overflow-hidden flex flex-col shadow-sm"
         >
-          <div class="relative aspect-[16/10] bg-slate-100">
+          <div class="relative aspect-[16/10] bg-slate-100 overflow-hidden flex items-center justify-center min-h-0">
             <img
-              src="https://images.unsplash.com/photo-1552664730-d307ca884978?w=400&h=250&fit=crop"
-              class="w-full h-full object-cover"
+              id="output-selected-image"
+              src="../img/img-gen-01.png"
+              class="max-w-full max-h-full w-full h-full object-contain"
+              alt="平面/視覺產出"
             />
             <div
               class="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1.5 rounded-full text-[11px] font-bold uppercase tracking-wider flex items-center gap-1 shadow-lg"
@@ -120,7 +136,7 @@
             </div>
           </div>
           <div class="p-6">
-            <h3 class="font-bold text-lg mb-1">主視覺橫幅 - 秋季系列</h3>
+            <h3 class="font-bold text-lg mb-1">平面/視覺產出</h3>
             <p class="text-xs text-slate-500 mb-4">PNG • 2.4 MB</p>
             <button
               class="w-full bg-primary text-white py-2 rounded-lg text-sm font-bold"
@@ -151,11 +167,21 @@
           <div class="p-6">
             <h3 class="font-bold text-lg mb-1">會議紀錄</h3>
             <p class="text-xs text-slate-500 mb-4">docx • 15 MB</p>
-            <button
-              class="w-full bg-primary text-white py-2 rounded-lg text-sm font-bold"
-            >
-              檔案下載
-            </button>
+            <div class="flex flex-col gap-2">
+              <button
+                class="w-full bg-primary text-white py-2 rounded-lg text-sm font-bold"
+              >
+                檔案下載
+              </button>
+              <a
+                href="https://gamma.app/zh-tw/products/presentations/pitch-decks"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-1 bg-secondary text-white py-1.5 px-3 rounded-lg text-xs font-bold hover:opacity-90 transition-opacity"
+              >
+                生成簡報
+              </a>
+            </div>
           </div>
         </div>
 
@@ -181,11 +207,21 @@
           <div class="p-6">
             <h3 class="font-bold text-lg mb-1">IMC策略報告</h3>
             <p class="text-xs text-slate-500 mb-4">docx • 1.2 MB</p>
-            <button
-              class="w-full bg-primary text-white py-2 rounded-lg text-sm font-bold"
-            >
-              檔案下載
-            </button>
+            <div class="flex flex-col gap-2">
+              <button
+                class="w-full bg-primary text-white py-2 rounded-lg text-sm font-bold"
+              >
+                檔案下載
+              </button>
+              <a
+                href="https://gamma.app/zh-tw/products/presentations/pitch-decks"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex items-center justify-center gap-1 bg-secondary text-white py-1.5 px-3 rounded-lg text-xs font-bold hover:opacity-90 transition-opacity"
+              >
+                生成簡報
+              </a>
+            </div>
           </div>
         </div>
       </div>
@@ -201,6 +237,14 @@
     </div>
     <script src="script.js"></script>
     <script>
+      (function () {
+        var params = new URLSearchParams(window.location.search);
+        var imgParam = params.get("img");
+        var el = document.getElementById("output-selected-image");
+        if (imgParam && el) {
+          el.src = "../img/" + imgParam;
+        }
+      })();
       // 使用者頭像點擊顯示登出選單
       const userAvatar = document.getElementById("user-avatar");
       const logoutMenu = document.getElementById("logout-menu");
